@@ -70,6 +70,27 @@
                         <button id="human-mode" class="mode-button" style="background-color: var(--human-color); color: white;">Human</button>
                     </div>
                 </div>
+
+                <div class="panel" id="debug-panel">
+                    <h2>Debug Tools</h2>
+                    <div class="button-group">
+                      <button id="force-low-level" class="button button-danger">Force Low Tank Level</button>
+                      <button id="show-decision-log" class="button button-secondary">Show Decision Log</button>
+                    </div>
+                </div>
+
+                <div class="panel" id="custom-order-panel">
+                    <h2>Modify Current Order</h2>
+                    <div class="input-group">
+                        <label for="bottles-500ml-input">Add 500ml Bottles:</label>
+                        <input type="number" id="bottles-500ml-input" min="0" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="bottles-300ml-input">Add 300ml Bottles:</label>
+                        <input type="number" id="bottles-300ml-input" min="0" value="0">
+                    </div>
+                    <button id="update-order-btn" class="button button-primary">Update Order</button>
+                </div>
                 
                 <div class="panel" id="stats-panel">
                     <h2>System Status</h2>

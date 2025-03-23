@@ -51,7 +51,8 @@ function initializeOrders() {
   state.orders = [
     new Order(20, 15, "Monday"),
     new Order(100, 20, "Tuesday"),
-    new Order(5, 5, "Friday")
+    // Modify the Friday order to be larger to ensure we hit the threshold
+    new Order(200, 180, "Friday")
   ];
   state.currentOrderIndex = 0;
   updateOrderDisplay();
@@ -67,14 +68,17 @@ function automatedSystem() {
   }
 
   // Check if tank needs refilling
-  if ((state.tankLevel / TANK_CAPACITY) * 100 <= REFILL_THRESHOLD) {
-    logMessage("AUTO: Tank level below threshold. Stopping production to refill.");
+  const tankPercentage = (state.tankLevel / TANK_CAPACITY) * 100;
+  if (tankPercentage <= REFILL_THRESHOLD) {
+    logMessage(`AUTO: Tank level (${tankPercentage.toFixed(1)}%) below threshold of ${REFILL_THRESHOLD}%. Stopping production to refill.`);
     refillTank();
     return;
   }
 
   // Continue with current order if not completed
   const currentOrder = state.orders[state.currentOrderIndex];
+  
+  logMessage(`AUTO: Processing order for ${currentOrder.deliveryDate}. Progress: 500ml (${currentOrder.bottles500mlFilled}/${currentOrder.bottles500ml}), 300ml (${currentOrder.bottles300mlFilled}/${currentOrder.bottles300ml})`);
   
   if (!currentOrder.isComplete) {
     // Decide which bottle to fill next
@@ -88,6 +92,8 @@ function automatedSystem() {
     logMessage(`AUTO: Order for ${currentOrder.deliveryDate} completed.`);
     state.currentOrderIndex++;
     if (state.currentOrderIndex < state.orders.length) {
+      const nextOrder = state.orders[state.currentOrderIndex];
+      logMessage(`AUTO: Moving to next order for ${nextOrder.deliveryDate}.`);
       updateOrderDisplay();
     } else {
       logMessage("AUTO: All orders completed!");
@@ -122,7 +128,7 @@ function aiSystem() {
       
       // Adjust flow rate for efficiency
       state.flowRate = Math.min(MAX_FLOW_RATE, Math.max(0.1, remainingWaterNeeded / 2));
-      logMessage(`AI: Optimized flow rate to ${state.flowRate.toFixed(1)}L/s`);
+      logMessage(`AI: Optimized flow rate to ${state.flowRate.toFixed(2)}L/s`);
       
       // Continue with current order
       if (currentOrder.bottles500mlFilled < currentOrder.bottles500ml) {
@@ -192,6 +198,7 @@ function humanSystem() {
     // Human checks if current order can be completed with remaining water
     if (currentOrder.remainingWaterNeeded <= state.tankLevel) {
       logMessage(`HUMAN: Making exception - completing current order despite low tank (${tankPercentage.toFixed(1)}%).`);
+      logMessage(`HUMAN: Tank has ${state.tankLevel.toFixed(1)}L which is sufficient to complete the remaining ${currentOrder.remainingWaterNeeded.toFixed(1)}L needed for this order.`);
       state.exceptions++;
       
       // Continue with current order
@@ -203,6 +210,7 @@ function humanSystem() {
     } else {
       // Need to refill
       logMessage(`HUMAN: Tank level at ${tankPercentage.toFixed(1)}% and insufficient for order completion.`);
+      logMessage(`HUMAN: Need ${currentOrder.remainingWaterNeeded.toFixed(1)}L to complete order but only have ${state.tankLevel.toFixed(1)}L left.`);
       refillTank();
     }
   } else {
@@ -253,6 +261,16 @@ function fillBottle(bottleType) {
   }
   
   updateDisplay();
+  
+  // Update progress bars
+  const progress500ml = currentOrder.bottles500mlFilled / currentOrder.bottles500ml * 100;
+  const progress300ml = currentOrder.bottles300mlFilled / currentOrder.bottles300ml * 100;
+  
+  const progressBar500ml = document.getElementById('progress-bar-500ml');
+  const progressBar300ml = document.getElementById('progress-bar-300ml');
+  
+  if (progressBar500ml) progressBar500ml.style.width = `${progress500ml}%`;
+  if (progressBar300ml) progressBar300ml.style.width = `${progress300ml}%`;
 }
 
 // Refills the tank
@@ -342,9 +360,15 @@ function resetSimulation() {
   initializeOrders();
   updateDisplay();
   logMessage("Simulation reset.");
+  
+  // Reset progress bars
+  const progressBar500ml = document.getElementById('progress-bar-500ml');
+  const progressBar300ml = document.getElementById('progress-bar-300ml');
+  
+  if (progressBar500ml) progressBar500ml.style.width = "0%";
+  if (progressBar300ml) progressBar300ml.style.width = "0%";
 }
 
-// Change mode
 // Change mode
 function changeMode(mode) {
   state.currentMode = mode;
@@ -438,6 +462,7 @@ function updateDisplay() {
   }
   
   updateOrderDisplay();
+  updateProgressBars();
 }
 
 // Update order display
@@ -462,6 +487,21 @@ function updateOrderDisplay() {
   if (order300mlEl) order300mlEl.textContent = order.bottles300ml;
   if (filled500mlEl) filled500mlEl.textContent = order.bottles500mlFilled;
   if (filled300mlEl) filled300mlEl.textContent = order.bottles300mlFilled;
+}
+
+// Update progress bars
+function updateProgressBars() {
+  if (state.currentOrderIndex >= state.orders.length) return;
+  
+  const currentOrder = state.orders[state.currentOrderIndex];
+  const progress500ml = currentOrder.bottles500mlFilled / currentOrder.bottles500ml * 100;
+  const progress300ml = currentOrder.bottles300mlFilled / currentOrder.bottles300ml * 100;
+  
+  const progressBar500ml = document.getElementById('progress-bar-500ml');
+  const progressBar300ml = document.getElementById('progress-bar-300ml');
+  
+  if (progressBar500ml) progressBar500ml.style.width = `${progress500ml}%`;
+  if (progressBar300ml) progressBar300ml.style.width = `${progress300ml}%`;
 }
 
 // Update log display
@@ -513,6 +553,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const humanModeBtn = document.getElementById('human-mode');
   if (humanModeBtn) humanModeBtn.addEventListener('click', () => changeMode('human'));
   
+  // New event listeners
+  const updateOrderBtn = document.getElementById('update-order-btn');
+  if (updateOrderBtn) updateOrderBtn.addEventListener('click', updateOrderQuantities);
+  
+  const forceLowLevelBtn = document.getElementById('force-low-level');
+  if (forceLowLevelBtn) forceLowLevelBtn.addEventListener('click', forceLowTankLevel);
+  
+  const showDecisionLogBtn = document.getElementById('show-decision-log');
+  if (showDecisionLogBtn) showDecisionLogBtn.addEventListener('click', showDecisionLog);
+  
   // Initialize display
   updateDisplay();
 });
@@ -533,3 +583,85 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 });
+
+// Update current order quantities
+function updateOrderQuantities() {
+  if (state.currentOrderIndex >= state.orders.length) return;
+  
+  const bottles500ml = parseInt(document.getElementById('bottles-500ml-input').value) || 0;
+  const bottles300ml = parseInt(document.getElementById('bottles-300ml-input').value) || 0;
+  
+  if (bottles500ml <= 0 && bottles300ml <= 0) {
+    logMessage("Please enter valid bottle quantities greater than zero.");
+    return;
+  }
+  
+  const currentOrder = state.orders[state.currentOrderIndex];
+  
+  // Update the order with new quantities
+  const additionalWater = bottles500ml * BOTTLE_500ML + bottles300ml * BOTTLE_300ML;
+  
+  currentOrder.bottles500ml += bottles500ml;
+  currentOrder.bottles300ml += bottles300ml;
+  
+  logMessage(`Order updated: Added ${bottles500ml} 500ml bottles and ${bottles300ml} 300ml bottles.`);
+  logMessage(`Additional water required: ${additionalWater.toFixed(1)}L`);
+  
+  // Reset input fields
+  document.getElementById('bottles-500ml-input').value = 0;
+  document.getElementById('bottles-300ml-input').value = 0;
+  
+  updateOrderDisplay();
+  updateProgressBars();
+}
+
+// Function to force the tank to a low level
+function forceLowTankLevel() {
+  const newLevel = TANK_CAPACITY * (REFILL_THRESHOLD / 100 + 0.02); // Just above threshold
+  state.tankLevel = newLevel;
+  
+  const tankPercentage = (newLevel / TANK_CAPACITY) * 100;
+  logMessage(`DEBUG: Tank level forcibly set to ${newLevel.toFixed(1)}L (${tankPercentage.toFixed(1)}%)`);
+  logMessage(`DEBUG: This is slightly above the ${REFILL_THRESHOLD}% threshold to test decision making.`);
+  
+  updateDisplay();
+}
+
+// Function to show a detailed decision log
+function showDecisionLog() {
+  const currentOrder = state.currentOrderIndex < state.orders.length ? 
+                        state.orders[state.currentOrderIndex] : null;
+  
+  if (!currentOrder) {
+    logMessage("DEBUG: No active order to analyze.");
+    return;
+  }
+  
+  const tankPercentage = (state.tankLevel / TANK_CAPACITY) * 100;
+  const remainingWaterNeeded = currentOrder.remainingWaterNeeded;
+  const nextBottleSize = getNextBottleSize();
+  
+  logMessage("DEBUG: Current system state analysis");
+  logMessage(`DEBUG: Tank level: ${state.tankLevel.toFixed(1)}L (${tankPercentage.toFixed(1)}%)`);
+  logMessage(`DEBUG: Threshold: ${REFILL_THRESHOLD}%`);
+  logMessage(`DEBUG: Current order needs ${remainingWaterNeeded.toFixed(1)}L more water`);
+  logMessage(`DEBUG: Next bottle needs ${nextBottleSize.toFixed(1)}L`);
+  
+  if (tankPercentage <= REFILL_THRESHOLD) {
+    if (remainingWaterNeeded <= state.tankLevel) {
+      logMessage("DEBUG: HUMAN would complete the order before refilling");
+    } else {
+      logMessage("DEBUG: HUMAN would refill now");
+    }
+    
+    if (nextBottleSize > 0 && nextBottleSize <= state.tankLevel) {
+      logMessage("DEBUG: AI would fill at least one more bottle");
+    } else {
+      logMessage("DEBUG: AI would refill now");
+    }
+    
+    logMessage("DEBUG: AUTO would refill now without exceptions");
+  } else {
+    logMessage("DEBUG: All systems would continue normal operation (above threshold)");
+  }
+}
