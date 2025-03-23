@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.control-panel, .stats-panel, .order-panel, .log-panel {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.mode-button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.button-group {
+    margin-bottom: 10px;
+}
+.button-primary {
+    background-color: #3498db;
+    color: white;
+}
+.button-secondary {
+    background-color: #2ecc71;
+    color: white;
+}
+.button-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+.flex-container {
+    display: flex;
+    gap: 20px;
+}
+.flex-column {
+    flex: 1;
+}
+.tank-container {
+    width: 100px;
+    height: 200px;
+    background-color: #ecf0f1;
+    border: 2px solid #7f8c8d;
+    border-radius: 5px;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+}
+.tank-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #3498db;
+    transition: height 0.5s ease;
+}
+.low-level {
+    background-color: #e74c3c;
+}
+.threshold-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #e74c3c;
+    bottom: 50%;
+    left: 0;
+}
+.stat-value {
+    font-weight: bold;
+    color: #2c3e50;
+}
+.log-container {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+.log-entry {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+.auto-log {
+    color: #7f8c8d;
+}
+.ai-log {
+    color: #2980b9;
+}
+.human-log {
+    color: #27ae60;
+}
+.order-progress {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Bottling Plant Simulation</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --light-bg: #f3f4f6;
+            --dark-bg: #1e293b;
+            --auto-color: #64748b;
+            --ai-color: #3b82f6;
+            --human-color: #22c55e;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--light-bg);
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--dark-bg), #334155);
+            color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+
+        .panel {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            color: #1e293b;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .panel h3 {
+            font-size: 1.1rem;
+            margin: 15px 0 10px;
+        }
+
+        .button {
+            padding: 10px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .button:hover {
+            filter: brightness(110%);
+            transform: translateY(-1px);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .button-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .button-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .button-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .mode-button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+
+        .mode-button:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        .mode-button.active {
+            opacity: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flex-column {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .tank-container {
+            width: 120px;
+            height: 220px;
+            background-color: #f8fafc;
+            border: 3px solid #94a3b8;
+            border-radius: var(--border-radius);
+            margin: 15px auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .tank-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #38bdf8, #60a5fa);
+            transition: height 0.8s ease;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+        }
+
+        .low-level {
+            background: linear-gradient(to top, #f87171, #fb7185);
+        }
+
+        .critical-level {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .threshold-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: #ef4444;
+            bottom: 30%;
+            left: 0;
+            opacity: 0.7;
+        }
+
+        .threshold-label {
+            position: absolute;
+            right: -75px;
+            bottom: 30%;
+            font-size: 0.8rem;
+            color: #ef4444;
+            transform: translateY(50%);
+        }
+
+        .tank-label {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 10px;
+            color: #475569;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #1e293b;
+            background-color: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-item p {
+            margin: 0;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+
+        .log-container {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f1f5f9;
+        }
+
+        .log-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .log-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .log-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            border-left: 3px solid #cbd5e1;
+            background-color: white;
+        }
+
+        .auto-log {
+            border-left-color: var(--auto-color);
+        }
+
+        .ai-log {
+            border-left-color: var(--ai-color);
+        }
+
+        .human-log {
+            border-left-color: var(--human-color);
+        }
+
+        .log-time {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .order-progress {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 15px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-color), #4ade80);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .badge-500ml {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-300ml {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .bottle-icon {
+            display: inline-block;
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+
+        .day-badge {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 0;
+            font-size: 0.9rem;
+        }
+
+        .mode-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .order-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Water Bottling Plant Simulation</h1>
+            <p>Compare Automated System, AI, and Human Decision Making</p>
+        </div>
+        
+        <div class="flex-container">
+            <div class="flex-column">
+                <div class="panel" id="control-panel">
+                    <h2>Control Panel</h2>
+                    <div class="button-group">
+                        <button id="start-btn" class="button button-primary">
+                            <i class="fas fa-play"></i> Start Simulation
+                        </button>
+                        <button id="stop-btn" class="button button-danger">
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                        <button id="reset-btn" class="button button-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    <h3>Decision Mode: <span id="current-mode" class="mode-indicator" style="background-color: var(--auto-color);">Automated</span></h3>
+                    <div class="button-group">
+                        <button id="auto-mode" class="mode-button active" style="background-color: var(--auto-color); color: white;">Automated</button>
+                        <button id="ai-mode" class="mode-button" style="background-color: var(--ai-color); color: white;">AI System</button>
+                        <button id="human-mode" class="mode-button" style="background-color: var(--human-color); color: white;">Human</button>
+                    </div>
+                </div>
+                
+                <div class="panel" id="stats-panel">
+                    <h2>System Status</h2>
+                    <div class="flex-container">
+                        <div class="flex-column" style="flex: 0 0 auto;">
+                            <div class="tank-container">
+                                <div id="tank-fill" class="tank-fill" style="height: 100%;"></div>
+                                <div class="threshold-line"></div>
+                                <div class="threshold-label">Critical Level</div>
+                            </div>
+                            <div class="tank-label">Water Tank</div>
+                        </div>
+                        <div class="flex-column">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">Tank Level</span>
+                                    <p><span id="tank-level" class="stat-value">1000.0</span> L</p>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Tank Capacity</span>
+                                    <p><span id="tank-percentage" class="stat-value">100.0</span>%</p>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Flow Rate</span>
+                                    <p><span id="flow-rate" class="stat-value">0.50</span> L/s</p>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Simulation Time</span>
+                                    <p><span id="simulation-time" class="stat-value">0.0</span> s</p>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Exceptions Made</span>
+                                    <p><span id="exceptions" class="stat-value">0</span></p>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Production</span>
+                                    <p>
+                                        <span class="bottle-icon">🔹</span><span id="bottles-500ml" class="stat-value">0</span>
+                                        <span class="badge badge-500ml">500ml</span>
+                                    </p>
+                                    <p>
+                                        <span class="bottle-icon">🔸</span><span id="bottles-300ml" class="stat-value">0</span>
+                                        <span class="badge badge-300ml">300ml</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-column">
+                <div class="panel" id="order-panel">
+                    <div class="order-header">
+                        <h2>Current Order</h2>
+                        <span class="day-badge">Delivery: <span id="order-day">Monday</span></span>
+                    </div>
+                    <div id="current-order">
+                        <div class="order-progress">
+                            <h3><span class="badge badge-500ml">500ml</span> Bottles</h3>
+                            <div class="progress-label">
+                                <span>Progress:</span>
+                                <span><span id="filled-500ml">0</span>/<span id="order-500ml">20</span></span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div id="progress-bar-500ml" class="progress-bar" style="width: 0%"></div>
+                            </div>
+                            
+                            <h3><span class="badge badge-300ml">300ml</span> Bottles</h3>
+                            <div class="progress-label">
+                                <span>Progress:</span>
+                                <span><span id="filled-300ml">0</span>/<span id="order-300ml">15</span></span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div id="progress-bar-300ml" class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel" id="log-panel">
+                    <h2>System Log</h2>
+                    <div id="log-container" class="log-container">
+                        <!-- Logs will be added here -->
+                        <div class="log-entry auto-log">
+                            <span class="log-time">[00:00:00]</span> System initialized and ready
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
