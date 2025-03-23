@@ -516,3 +516,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize display
   updateDisplay();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hideExplanationBtn = document.getElementById('hide-explanation');
+  const explanationPanel = document.querySelector('.explanation-panel');
+  
+  if (hideExplanationBtn && explanationPanel) {
+      hideExplanationBtn.addEventListener('click', function() {
+          if (explanationPanel.style.display === 'none') {
+              explanationPanel.style.display = 'block';
+              this.textContent = 'Hide Explanation';
+          } else {
+              explanationPanel.style.display = 'none';
+              this.textContent = 'Show Explanation';
+          }
+      });
+  }
+});
