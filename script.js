@@ -1,5 +1,5 @@
 // Water Bottling Plant Simulation
-// This application simulates a water bottling plant with AI and human decision making
+// This application simulates a water bottling plant with automated vs AI decision making
 
 // Constants
 const TANK_CAPACITY = 1000; // Liters
@@ -14,14 +14,14 @@ let state = {
   tankLevel: TANK_CAPACITY,
   bottlesFilled500ml: 0,
   bottlesFilled300ml: 0,
-  currentMode: "auto", // "auto", "ai", "human"
+  currentMode: "auto", // "auto" or "ai"
   orders: [], // Will contain orders with bottle type, quantity, and delivery date
   currentOrderIndex: 0,
   currentTime: 0, // Simulation time in seconds
   flowRate: MAX_FLOW_RATE,
   running: false,
   logs: [],
-  exceptions: 0, // Track exceptions where human or AI overrode default behavior
+  exceptions: 0, // Track exceptions where AI overrode default behavior
 };
 
 // Order class
@@ -37,12 +37,12 @@ class Order {
 
   get isComplete() {
     return this.bottles500mlFilled >= this.bottles500ml && 
-           this.bottles300mlFilled >= this.bottles300ml;
+            this.bottles300mlFilled >= this.bottles300ml;
   }
 
   get remainingWaterNeeded() {
     return (this.bottles500ml - this.bottles500mlFilled) * BOTTLE_500ML + 
-           (this.bottles300ml - this.bottles300mlFilled) * BOTTLE_300ML;
+            (this.bottles300ml - this.bottles300mlFilled) * BOTTLE_300ML;
   }
 }
 
@@ -51,7 +51,6 @@ function initializeOrders() {
   state.orders = [
     new Order(20, 15, "Monday"),
     new Order(100, 20, "Tuesday"),
-    // Modify the Friday order to be larger to ensure we hit the threshold
     new Order(200, 180, "Friday")
   ];
   state.currentOrderIndex = 0;
@@ -181,58 +180,6 @@ function calculateOptimalFlowRate(remainingWater) {
   return baseRate * (0.5 + 0.5 * tankRatio); // Scale by tank level
 }
 
-// Human decision logic
-function humanSystem() {
-  // Check if we've completed all orders
-  if (state.currentOrderIndex >= state.orders.length) {
-    logMessage("HUMAN: All orders are already completed.");
-    stopSimulation();
-    return;
-  }
-
-  const currentOrder = state.orders[state.currentOrderIndex];
-  const tankPercentage = (state.tankLevel / TANK_CAPACITY) * 100;
-  
-  // Human experts can make more nuanced decisions
-  if (tankPercentage <= REFILL_THRESHOLD) {
-    // Human checks if current order can be completed with remaining water
-    if (currentOrder.remainingWaterNeeded <= state.tankLevel) {
-      logMessage(`HUMAN: Making exception - completing current order despite low tank (${tankPercentage.toFixed(1)}%).`);
-      logMessage(`HUMAN: Tank has ${state.tankLevel.toFixed(1)}L which is sufficient to complete the remaining ${currentOrder.remainingWaterNeeded.toFixed(1)}L needed for this order.`);
-      state.exceptions++;
-      
-      // Continue with current order
-      if (currentOrder.bottles500mlFilled < currentOrder.bottles500ml) {
-        fillBottle("500ml");
-      } else if (currentOrder.bottles300mlFilled < currentOrder.bottles300ml) {
-        fillBottle("300ml");
-      }
-    } else {
-      // Need to refill
-      logMessage(`HUMAN: Tank level at ${tankPercentage.toFixed(1)}% and insufficient for order completion.`);
-      logMessage(`HUMAN: Need ${currentOrder.remainingWaterNeeded.toFixed(1)}L to complete order but only have ${state.tankLevel.toFixed(1)}L left.`);
-      refillTank();
-    }
-  } else {
-    // Normal production
-    if (currentOrder.bottles500mlFilled < currentOrder.bottles500ml) {
-      fillBottle("500ml");
-    } else if (currentOrder.bottles300mlFilled < currentOrder.bottles300ml) {
-      fillBottle("300ml");
-    } else {
-      // Move to next order
-      logMessage(`HUMAN: Order for ${currentOrder.deliveryDate} completed.`);
-      state.currentOrderIndex++;
-      if (state.currentOrderIndex < state.orders.length) {
-        updateOrderDisplay();
-      } else {
-        logMessage("HUMAN: All orders completed!");
-        stopSimulation();
-      }
-    }
-  }
-}
-
 // Fills a bottle and updates state
 function fillBottle(bottleType) {
   if (state.currentOrderIndex >= state.orders.length) return;
@@ -313,9 +260,6 @@ function runSimulation() {
     case "ai":
       aiSystem();
       break;
-    case "human":
-      humanSystem();
-      break;
   }
   
   // Update time
@@ -384,27 +328,21 @@ function changeMode(mode) {
       currentModeEl.style.backgroundColor = 'var(--auto-color)';
     } else if (mode === 'ai') {
       currentModeEl.style.backgroundColor = 'var(--ai-color)';
-    } else if (mode === 'human') {
-      currentModeEl.style.backgroundColor = 'var(--human-color)';
     }
   }
   
   // Update active class on mode buttons
   const autoModeBtn = document.getElementById('auto-mode');
   const aiModeBtn = document.getElementById('ai-mode');
-  const humanModeBtn = document.getElementById('human-mode');
   
   if (autoModeBtn) autoModeBtn.classList.remove('active');
   if (aiModeBtn) aiModeBtn.classList.remove('active');
-  if (humanModeBtn) humanModeBtn.classList.remove('active');
   
   // Add active class to selected mode button
   if (mode === 'auto' && autoModeBtn) {
     autoModeBtn.classList.add('active');
   } else if (mode === 'ai' && aiModeBtn) {
     aiModeBtn.classList.add('active');
-  } else if (mode === 'human' && humanModeBtn) {
-    humanModeBtn.classList.add('active');
   }
 }
 
@@ -520,8 +458,6 @@ function updateLogDisplay() {
       logElement.classList.add('auto-log');
     } else if (log.includes('AI:')) {
       logElement.classList.add('ai-log');
-    } else if (log.includes('HUMAN:')) {
-      logElement.classList.add('human-log');
     }
     
     logElement.textContent = log;
@@ -549,9 +485,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const aiModeBtn = document.getElementById('ai-mode');
   if (aiModeBtn) aiModeBtn.addEventListener('click', () => changeMode('ai'));
-  
-  const humanModeBtn = document.getElementById('human-mode');
-  if (humanModeBtn) humanModeBtn.addEventListener('click', () => changeMode('human'));
   
   // New event listeners
   const updateOrderBtn = document.getElementById('update-order-btn');
@@ -638,22 +571,14 @@ function showDecisionLog() {
   }
   
   const tankPercentage = (state.tankLevel / TANK_CAPACITY) * 100;
-  const remainingWaterNeeded = currentOrder.remainingWaterNeeded;
   const nextBottleSize = getNextBottleSize();
   
   logMessage("DEBUG: Current system state analysis");
   logMessage(`DEBUG: Tank level: ${state.tankLevel.toFixed(1)}L (${tankPercentage.toFixed(1)}%)`);
   logMessage(`DEBUG: Threshold: ${REFILL_THRESHOLD}%`);
-  logMessage(`DEBUG: Current order needs ${remainingWaterNeeded.toFixed(1)}L more water`);
   logMessage(`DEBUG: Next bottle needs ${nextBottleSize.toFixed(1)}L`);
   
   if (tankPercentage <= REFILL_THRESHOLD) {
-    if (remainingWaterNeeded <= state.tankLevel) {
-      logMessage("DEBUG: HUMAN would complete the order before refilling");
-    } else {
-      logMessage("DEBUG: HUMAN would refill now");
-    }
-    
     if (nextBottleSize > 0 && nextBottleSize <= state.tankLevel) {
       logMessage("DEBUG: AI would fill at least one more bottle");
     } else {

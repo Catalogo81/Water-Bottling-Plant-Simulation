@@ -6,7 +6,6 @@
     --dark-bg: #1e293b;
     --auto-color: #64748b;
     --ai-color: #3b82f6;
-    --human-color: #22c55e;
     --border-radius: 8px;
     --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     --transition: all 0.3s ease;
@@ -280,15 +279,6 @@ body {
 
 .ai-log {
     border-left-color: var(--ai-color);
-}
-
-.human-log {
-    border-left-color: var(--human-color);
-}
-
-.debug-log {
-    border-left-color: var(--danger-color);
-    background-color: #fff5f5;
 }
 
 .log-time {

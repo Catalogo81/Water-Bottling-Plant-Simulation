@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Water Bottling Plant Simulation">
-    <meta property="og:description" content="Compare Automated System, AI, and Human Decision Making in a water bottling plant simulation">
+    <meta property="og:description" content="Compare Automated System vs AI Decision Making in a water bottling plant simulation">
     <meta property="og:image" content="https://watter_bottle.png">
     <meta property="og:url" content="https://catalogo81.github.io/water-bottling-simulation/">
     <meta name="twitter:card" content="summary_large_image">
     <title>Water Bottling Plant Simulation</title>
     <link rel="icon" type="image/png" href="water_bottle.png">
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Water Bottling Plant Simulation</h1>
-            <p>Compare Automated System, AI, and Human Decision Making</p>
+            <p>Compare Automated System vs AI Decision Making</p>
         </div>
 
         <div class="explanation-panel">
@@ -24,7 +25,7 @@
             <div class="explanation-content">
                 <div class="explanation-icon">💧</div>
                 <div class="explanation-text">
-                    <p>This simulation demonstrates three different decision-making approaches in a water bottling plant:</p>
+                    <p>This simulation demonstrates two different decision-making approaches in a water bottling plant:</p>
                     
                     <div class="decision-modes">
                         <div class="decision-mode">
@@ -36,14 +37,9 @@
                             <span class="mode-label" style="background-color: var(--ai-color);">AI System</span>
                             <p>Uses reinforcement learning concepts to make dynamic decisions. It can make exceptions to the 50% rule when it calculates there's enough water to complete more bottles, and it optimizes flow rate based on current conditions.</p>
                         </div>
-                        
-                        <div class="decision-mode">
-                            <span class="mode-label" style="background-color: var(--human-color);">Human Decision Making</span>
-                            <p>Makes more comprehensive decisions by looking at the entire order at once, allowing exceptions when the entire order can be completed with the remaining water.</p>
-                        </div>
                     </div>
                     
-                    <p class="explanation-footer">This application provides a practical demonstration of how AI can improve upon traditional automated systems while still benefiting from human oversight.</p>
+                    <p class="explanation-footer">This application provides a practical demonstration of how AI can improve upon traditional automated systems.</p>
                 </div>
             </div>
             <button id="hide-explanation" class="button button-secondary">Hide Explanation</button>
@@ -55,20 +51,19 @@
                     <h2>Control Panel</h2>
                     <div class="button-group">
                         <button id="start-btn" class="button button-primary">
-                            <i class="fas fa-play"></i> Start Simulation
+                            Start Simulation
                         </button>
                         <button id="stop-btn" class="button button-danger">
-                            <i class="fas fa-stop"></i> Stop
+                            Stop
                         </button>
                         <button id="reset-btn" class="button button-secondary">
-                            <i class="fas fa-redo"></i> Reset
+                            Reset
                         </button>
                     </div>
                     <h3>Decision Mode: <span id="current-mode" class="mode-indicator" style="background-color: var(--auto-color);">Automated</span></h3>
                     <div class="button-group">
                         <button id="auto-mode" class="mode-button active" style="background-color: var(--auto-color); color: white;">Automated</button>
                         <button id="ai-mode" class="mode-button" style="background-color: var(--ai-color); color: white;">AI System</button>
-                        <button id="human-mode" class="mode-button" style="background-color: var(--human-color); color: white;">Human</button>
                     </div>
                 </div>
 
@@ -184,7 +179,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
