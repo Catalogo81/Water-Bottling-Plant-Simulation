@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ensemble AI for Smart Manufacturing - Research Proposal</title>
+    <title>Ensemble AI for Reducing Downtime in Smart Manufacturing</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e3a8a 100%);
             color: white;
-            overflow-x: hidden;
+            overflow: hidden;
         }
         
         .slide {
@@ -21,9 +25,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
-            box-sizing: border-box;
+            padding: 40px;
             position: relative;
+            background: rgba(0,0,0,0.1);
         }
         
         .slide.active {
@@ -31,62 +35,115 @@
         }
         
         .slide h1 {
-            font-size: 3.5em;
+            font-size: 3.2em;
             margin-bottom: 30px;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.2;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            line-height: 1.1;
+            max-width: 1200px;
         }
         
         .slide h2 {
-            font-size: 2.8em;
-            margin-bottom: 40px;
+            font-size: 2.6em;
+            margin-bottom: 35px;
             text-align: center;
-            color: #f0f8ff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            color: #fbbf24;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+            font-weight: 600;
         }
         
         .slide h3 {
-            font-size: 2.2em;
-            margin-bottom: 30px;
-            color: #87ceeb;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .slide ul {
-            font-size: 1.4em;
-            line-height: 1.8;
-            max-width: 1000px;
-            text-align: left;
-        }
-        
-        .slide li {
-            margin-bottom: 15px;
-            padding-left: 10px;
-            position: relative;
-        }
-        
-        .slide li::before {
-            content: "▶";
-            color: #87ceeb;
-            font-size: 1.2em;
-            position: absolute;
-            left: -30px;
+            font-size: 2.0em;
+            margin-bottom: 25px;
+            color: #60a5fa;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-weight: 600;
         }
         
         .subtitle {
-            font-size: 1.8em;
-            margin-top: 20px;
+            font-size: 1.6em;
+            margin-top: 25px;
             text-align: center;
             opacity: 0.9;
             font-style: italic;
+            font-weight: 300;
         }
         
         .author-info {
             margin-top: 40px;
             text-align: center;
-            font-size: 1.3em;
-            opacity: 0.8;
+            font-size: 1.2em;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+        
+        .big-text {
+            font-size: 2.2em;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .problem-box {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .solution-box {
+            background: linear-gradient(135deg, #059669, #10b981);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .objective-box {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .method-box {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .phase-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .phase-box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .phase-box h4 {
+            color: #fbbf24;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
         .navigation {
@@ -98,493 +155,434 @@
         
         .nav-btn {
             background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.4);
             color: white;
-            padding: 12px 20px;
-            margin: 0 5px;
+            padding: 15px 25px;
+            margin: 0 8px;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 30px;
             font-size: 1.1em;
+            font-weight: 600;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .nav-btn:hover {
             background: rgba(255,255,255,0.3);
             transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
         }
         
         .slide-counter {
             position: fixed;
             bottom: 30px;
             left: 30px;
-            font-size: 1.2em;
-            opacity: 0.7;
+            font-size: 1.3em;
+            font-weight: 600;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
         
-        .two-column {
-            display: flex;
-            gap: 60px;
+        .key-points {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
             width: 100%;
             max-width: 1200px;
-            align-items: flex-start;
+            margin: 30px 0;
         }
         
-        .column {
-            flex: 1;
-        }
-        
-        .highlight {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #87ceeb;
-        }
-        
-        .methodology-phase {
-            background: rgba(255,255,255,0.08);
+        .point-card {
+            background: rgba(255,255,255,0.15);
             padding: 25px;
-            margin: 15px 0;
-            border-radius: 12px;
-            border-left: 5px solid #87ceeb;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
         
-        .methodology-phase h4 {
-            color: #87ceeb;
+        .point-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .point-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .point-card h4 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #fbbf24;
+        }
+        
+        .point-card p {
+            font-size: 1.1em;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px 0;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .flow-arrow {
+            font-size: 2em;
+            color: #fbbf24;
+            margin: 0 15px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px 0;
+        }
+        
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .result-item h4 {
+            color: #10b981;
             font-size: 1.6em;
             margin-bottom: 15px;
         }
         
-        .table-container {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
+        .metric {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #fbbf24;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 1.1em;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        th {
-            background: rgba(255,255,255,0.1);
-            color: #87ceeb;
-            font-weight: bold;
-        }
-        
-        .problem-statement {
-            background: rgba(255,100,100,0.1);
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        .objectives {
-            background: rgba(100,255,100,0.1);
-            border-left: 4px solid #51cf66;
-        }
-        
-        .gap-analysis {
-            background: rgba(255,200,100,0.1);
-            border-left: 4px solid #ffd43b;
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
         }
     </style>
 </head>
 <body>
     <!-- Slide 1: Title -->
     <div class="slide active">
-        <h1>Developing an Ensemble AI Model for Optimizing Dynamic Decision-Making in Smart Manufacturing Environments</h1>
-        <div class="subtitle">Master of Information Technology Research Proposal</div>
-        <div class="author-info">
-            <strong>Kgotso Matjato</strong><br>
-            Supervisor: Dr. J Coetzer<br>
-            Co-supervisor: Prof. R.B. Kuriakose<br>
-            Faculty of Engineering, Built Environment and Information Technology<br>
-            Central University of Technology, Free State
-        </div>
-    </div>
-
-    <!-- Slide 2: Contents -->
-    <div class="slide">
-        <h2>Contents</h2>
-        <ul>
-            <li><strong>Background & Context</strong> - The smart manufacturing landscape</li>
-            <li><strong>Problem Statement</strong> - Current limitations in AI decision-making in Smart Manufacturing Environments</li>
-            <li><strong>Research Objectives</strong> - What we aim to achieve</li>
-            <li><strong>Literature Review Summary</strong> - Key findings from existing research</li>
-            <li><strong>Methodology</strong> - Four-phase research approach</li>
-            <li><strong>Case Study</strong> - CUT Water Bottling Plant</li>
-            <li><strong>Expected Outcomes</strong> - Scientific and social contributions</li>
-            <li><strong>Timeline & Budget</strong> - Project planning and resources</li>
-        </ul>
-    </div>
-
-    <!-- Slide 3: Background -->
-    <div class="slide">
-        <h2>Background & Context</h2>
-        <div class="two-column">
-            <div class="column">
-                <h3>Smart Manufacturing Revolution</h3>
-                <ul>
-                    <li><strong>AI Integration:</strong> Artificial Intelligence has become the cornerstone of modern manufacturing, revolutionizing operational workflows and quality control systems</li>
-                    <li><strong>Industry 4.0:</strong> Smart factories enable "a large number of decisions in real-time and optimal manner" through interconnected machinery</li>
-                    <li><strong>Digital Transformation:</strong> Manufacturing environments require adaptive, real-time decision-making capabilities</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Current Challenges</h3>
-                <ul>
-                    <li><strong>Complexity:</strong> Modern manufacturing involves multiple interconnected subsystems requiring coordinated control</li>
-                    <li><strong>Adaptability:</strong> Traditional optimization methods struggle with uncertainty and dynamic production variations</li>
-                    <li><strong>Integration Gap:</strong> Existing AI implementations often operate in isolation without sophisticated coordination</li>
-                </ul>
+        <div class="center-content">
+            <h1>Developing an Ensemble AI Model for<br>Reducing Downtime in Smart Manufacturing</h1>
+            <div class="subtitle">Master of Information Technology Research Proposal</div>
+            <div class="author-info">
+                <strong>Kgotso Matjato</strong><br>
+                Supervisor: Dr. J Coetzer | Co-supervisor: Prof. R.B. Kuriakose<br>
+                Faculty of Engineering, Built Environment and Information Technology<br>
+                Central University of Technology, Free State
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: Problem Statement -->
+    <!-- Slide 2: The Problem -->
     <div class="slide">
-        <h2>Problem Statement</h2>
-        <div class="highlight problem-statement">
-            <h3>Core Challenge</h3>
-            <p>Modern smart manufacturing environments are characterized by increased complexity, dynamic production requirements, and the necessity for real-time optimization across multiple interconnected subsystems.</p>
-        </div>
-        <ul>
-            <li><strong>Isolated AI Systems:</strong> Current AI implementations often operate without coordinated decision-making capabilities</li>
-            <li><strong>Limited Adaptability:</strong> Existing systems struggle with real-time production variations and lack sophisticated multiple AI techniques coordination</li>
-            <li><strong>Research Gap:</strong> Insufficient research into comprehensive frameworks that enable multiple AI techniques to work collaboratively in dynamic, real-world environments</li>
-            <li><strong>Technical Challenge:</strong> Designing adaptive AI systems capable of maintaining coordinated operation among multiple autonomous systems, especially in digital twin environments</li>
-        </ul>
-    </div>
-
-    <!-- Slide 5: Research Objectives -->
-    <div class="slide">
-        <h2>Research Aim and Objectives</h2>
-        <div class="highlight objectives">
-            <h3>Primary Aim</h3>
-            <p>To develop and validate a comprehensive ensemble AI model for optimizing dynamic decision-making in smart manufacturing environments through integration with digital twin technology, focusing on enhancing production efficiency and system adaptability.</p>
-        </div>
-        <h3>Specific Objectives</h3>
-        <ul>
-            <li><strong>Objective 1:</strong> Develop a digital twin model that simulates dynamic decision-making in smart manufacturing environments and identify parameters influencing operational efficiency</li>
-            <li><strong>Objective 2:</strong> Design and implement an ensemble AI system within the digital twin framework that enables coordinated, real-time decision-making across multiple manufacturing subsystems</li>
-            <li><strong>Objective 3:</strong> Evaluate and validate the performance of the integrated system by benchmarking AI techniques against each other and baseline strategies, measuring production efficiency, throughput, and flexibility</li>
-        </ul>
-    </div>
-
-    <!-- Slide 6: Literature Review Summary -->
-    <div class="slide">
-        <h2>Literature Review Summary</h2>
-        <div class="two-column">
-            <div class="column">
-                <h3>Key Technologies</h3>
-                <ul>
-                    <li><strong>Digital Twins:</strong> Virtual replicas enabling real-time simulation and "what-if" scenarios without disrupting production (Tshabalala & Kuriakose, 2022)</li>
-                    <li><strong>Reinforcement Learning:</strong> Effective for dynamic production scheduling and flow control, learning optimal policies through trial-and-error (Alexopoulos et al., 2022)</li>
-                    <li><strong>Ensemble Methods:</strong> Combining multiple models enhances predictive accuracy and robustness (Priore et al., 2018)</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Research Gaps Identified</h3>
-                <ul>
-                    <li><strong>Integration Challenges:</strong> Difficulties in data integration and compatibility for accurate digital replicas</li>
-                    <li><strong>Limited Frameworks:</strong> Lack of systematic approaches for integrating DTs, RL, and ensemble AI in industrial settings</li>
-                    <li><strong>Scalability Issues:</strong> Most research focuses on case-specific solutions rather than comprehensive frameworks</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 7: Case Study Context -->
-    <div class="slide">
-        <h2>Case Study: CUT Water Bottling Plant</h2>
-        <div class="two-column">
-            <div class="column">
-                <h3>Plant Overview</h3>
-                <ul>
-                    <li><strong>Purpose:</strong> Automated water bottling plant producing 330ml and 500ml bottles for internal CUT use</li>
-                    <li><strong>Three Smart Manufacturing Units (SMUs):</strong>
-                        <ul style="margin-top: 10px;">
-                            <li>Source and tank unit</li>
-                            <li>Bottle manufacturing and storage unit</li>
-                            <li>Filling and packaging unit</li>
-                        </ul>
-                    </li>
-                    <li><strong>Control System:</strong> Siemens S7-1200 PLC with corresponding Simulink digital twin model</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Research Advantages</h3>
-                <ul>
-                    <li><strong>Existing Infrastructure:</strong> 3D-printed model successfully simulated in MATLAB/Simulink</li>
-                    <li><strong>Real-time Integration:</strong> Cloud platform for customer orders and PLC system control</li>
-                    <li><strong>Prior Research:</strong> Builds on Coetzer et al.'s human-system collaboration work and Tshabalala & Kuriakose's digital twin results</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 8: Methodology Overview -->
-    <div class="slide">
-        <h2>Research Methodology</h2>
-        <div class="highlight">
-            <h3>Four-Phase Experimental and Simulation-Based Approach</h3>
-            <p>Using the automated water bottling plant at CUT as a comprehensive case study for testing ensemble AI decision-making systems</p>
-        </div>
-        <div class="two-column">
-            <div class="column">
-                <h3>Phase 1: Digital Twin Development</h3>
-                <ul>
-                    <li>High-fidelity digital twin creation</li>
-                    <li>Parameter identification and validation</li>
-                    <li>Integration with existing Simulink model</li>
-                </ul>
-                <h3>Phase 2: Ensemble AI Design</h3>
-                <ul>
-                    <li>Multiple AI technique implementation (RL, GA, PSO)</li>
-                    <li>Coordination framework development</li>
-                    <li>Training and experimentation</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Phase 3: System Integration</h3>
-                <ul>
-                    <li>Real-time simulation environment</li>
-                    <li>Monitoring and testing interface</li>
-                    <li>Robustness testing under various conditions</li>
-                </ul>
-                <h3>Phase 4: Validation & Optimization</h3>
-                <ul>
-                    <li>Controlled scenario testing</li>
-                    <li>Performance benchmarking</li>
-                    <li>Statistical analysis and refinement</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 9: Phase 1 Details -->
-    <div class="slide">
-        <h2>Phase 1: Digital Twin Development</h2>
-        <div class="methodology-phase">
-            <h4>Objective: Create High-Fidelity Digital Replica</h4>
-            <p>Develop a comprehensive digital twin that captures the plant's physical components, control logic, and operational dynamics</p>
-        </div>
-        <div class="two-column">
-            <div class="column">
-                <h3>Technical Implementation</h3>
-                <ul>
-                    <li><strong>Platform:</strong> MATLAB/Simulink with Unity integration for visualization</li>
-                    <li><strong>System Modeling:</strong> Three production units with PLC control logic replication</li>
-                    <li><strong>Data Integration:</strong> Real-time sensor data feeds and cloud platform connectivity</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Key Tasks</h3>
-                <ul>
-                    <li><strong>Parameter Identification:</strong> Bottle size, flow rates, order queues, cycle times</li>
-                    <li><strong>Validation:</strong> Compare digital twin outputs with actual plant performance metrics</li>
-                    <li><strong>Optimization:</strong> Ensure low-latency communication and accurate real-time representation</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 10: Phase 2 Details -->
-    <div class="slide">
-        <h2>Phase 2: Ensemble AI System Design</h2>
-        <div class="methodology-phase">
-            <h4>Objective: Multi-Algorithm Coordination Framework</h4>
-            <p>Design an ensemble AI system that leverages multiple techniques for different decision-making aspects</p>
-        </div>
-        <div class="two-column">
-            <div class="column">
-                <h3>AI Techniques</h3>
-                <ul>
-                    <li><strong>Reinforcement Learning (RL):</strong> Dynamic flow adjustment and adaptive scheduling</li>
-                    <li><strong>Genetic Algorithm (GA):</strong> Optimization of production parameters and routing</li>
-                    <li><strong>Particle Swarm Optimization (PSO):</strong> Resource allocation and coordination</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>System Architecture</h3>
-                <ul>
-                    <li><strong>Coordination Layer:</strong> Central decision-making coordinator that selects optimal AI responses</li>
-                    <li><strong>Communication Protocol:</strong> API-based interaction through digital twin interface</li>
-                    <li><strong>Adaptive Selection:</strong> Context-aware switching between algorithms based on operational conditions</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 11: Testing Scenarios -->
-    <div class="slide">
-        <h2>Phase 3 & 4: Integration and Testing</h2>
-        <div class="table-container">
-            <table>
-                <tr>
-                    <th>Test Scenario</th>
-                    <th>Challenge</th>
-                    <th>AI Response Expected</th>
-                    <th>Metrics Measured</th>
-                </tr>
-                <tr>
-                    <td>Normal Production</td>
-                    <td>Steady-state operation</td>
-                    <td>Optimal pump speed and filling sequences</td>
-                    <td>Baseline throughput, efficiency</td>
-                </tr>
-                <tr>
-                    <td>Tank Level Depletion</td>
-                    <td>Water shortage</td>
-                    <td>Adaptive flow control and production pausing</td>
-                    <td>Response time, wastage reduction</td>
-                </tr>
-                <tr>
-                    <td>Mixed Order Surge</td>
-                    <td>330ml + 500ml demand</td>
-                    <td>Dynamic bottle switching and rescheduling</td>
-                    <td>Order completion time, flexibility</td>
-                </tr>
-                <tr>
-                    <td>Equipment Fault</td>
-                    <td>Capping station failure</td>
-                    <td>Fault detection and rapid replanning</td>
-                    <td>Downtime, recovery efficiency</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- Slide 12: Expected Outcomes -->
-    <div class="slide">
-        <h2>Expected Outcomes</h2>
-        <div class="two-column">
-            <div class="column">
-                <h3>Scientific Contributions</h3>
-                <ul>
-                    <li><strong>Validated Framework:</strong> Comprehensive ensemble AI methodology for smart manufacturing</li>
-                    <li><strong>Empirical Data:</strong> Performance comparison of different AI techniques under various industrial scenarios</li>
-                    <li><strong>Digital Twin Integration:</strong> Practical implementation of AI-DT systems for real-time decision support</li>
-                </ul>
-                <h3>Social Impact</h3>
-                <ul>
-                    <li><strong>Industry Support:</strong> Enable local manufacturers to improve efficiency using accessible AI-driven systems</li>
-                    <li><strong>Skills Development:</strong> Upskill postgraduate students in AI and simulation technologies</li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Innovation Potential</h3>
-                <ul>
-                    <li><strong>Reusable Testbed:</strong> AI-twin research and training platform for educational institutions</li>
-                    <li><strong>Applied Innovations:</strong> Real-time scheduling, fault prediction, and energy efficiency improvements</li>
-                    <li><strong>Scalable Solutions:</strong> Framework applicable to various small-scale production environments</li>
-                </ul>
-                <h3>Publications & Dissemination</h3>
-                <ul>
-                    <li>Conference presentations at manufacturing and AI venues</li>
-                    <li>Journal articles in smart manufacturing and AI journals</li>
-                    <li>Potential patent applications for novel coordination methods</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 13: Timeline & Budget -->
-    <div class="slide">
-        <h2>Timeline & Budget</h2>
-        <div class="two-column">
-            <div class="column">
-                <h3>Project Timeline</h3>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>Phase</th>
-                            <th>Duration</th>
-                            <th>Key Deliverables</th>
-                        </tr>
-                        <tr>
-                            <td>Q1</td>
-                            <td>3 months</td>
-                            <td>Literature review, Digital twin development</td>
-                        </tr>
-                        <tr>
-                            <td>Q2</td>
-                            <td>3 months</td>
-                            <td>AI model implementation, Training</td>
-                        </tr>
-                        <tr>
-                            <td>Q3</td>
-                            <td>3 months</td>
-                            <td>System integration, Testing scenarios</td>
-                        </tr>
-                        <tr>
-                            <td>Q4</td>
-                            <td>3 months</td>
-                            <td>Validation, Analysis, Dissertation writing</td>
-                        </tr>
-                    </table>
+        <div class="center-content">
+            <h2>The Problem</h2>
+            <div class="problem-box">
+                <div class="big-text">
+                    <strong>System downtime in smart manufacturing</strong> costs industries billions annually
                 </div>
             </div>
-            <div class="column">
-                <h3>Estimated Budget</h3>
-                <ul>
-                    <li><strong>Software Licenses:</strong> MATLAB/Simulink, Python AI frameworks (covered by institutional licenses)</li>
-                    <li><strong>Hardware:</strong> High-performance computing resources for AI training and simulation</li>
-                    <li><strong>Travel & Conferences:</strong> Research dissemination and networking</li>
-                    <li><strong>Miscellaneous:</strong> Internet connectivity, cloud services, documentation</li>
-                </ul>
-                <div class="highlight">
-                    <strong>Total Estimated Cost:</strong> Primarily covered through existing university resources and supervisor research funding
+            <div class="key-points">
+                <div class="point-card">
+                    <span class="icon">⚠️</span>
+                    <h4>Isolated AI Systems</h4>
+                    <p>Current AI operates without coordination</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">⏱️</span>
+                    <h4>Reactive Responses</h4>
+                    <p>Systems respond to problems after they occur</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🔧</span>
+                    <h4>Limited Adaptability</h4>
+                    <p>Struggle with dynamic production variations</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 14: Conclusion -->
+    <!-- Slide 3: Our Solution -->
     <div class="slide">
-        <h2>Conclusion</h2>
-        <div class="highlight">
-            <h3>Research Significance</h3>
-            <p>This research addresses a critical gap in smart manufacturing by developing a comprehensive framework for ensemble AI decision-making within digital twin environments.</p>
-        </div>
-        <div class="two-column">
-            <div class="column">
-                <h3>Key Contributions</h3>
-                <ul>
-                    <li><strong>Novel Integration:</strong> First comprehensive study combining digital twins, reinforcement learning, and ensemble AI for manufacturing</li>
-                    <li><strong>Practical Implementation:</strong> Real-world validation using CUT's water bottling plant</li>
-                    <li><strong>Scalable Framework:</strong> Methodology applicable to various manufacturing environments</li>
-                </ul>
+        <div class="center-content">
+            <h2>Our Solution</h2>
+            <div class="solution-box">
+                <div class="big-text">
+                    <strong>Ensemble AI Model</strong> that coordinates multiple AI techniques to predict and prevent downtime
+                </div>
             </div>
-            <div class="column">
-                <h3>Future Impact</h3>
-                <ul>
-                    <li><strong>Industry 4.0 Advancement:</strong> Contribute to next-generation smart manufacturing systems</li>
-                    <li><strong>Educational Value:</strong> Establish CUT as a leader in AI-driven manufacturing research</li>
-                    <li><strong>Economic Benefits:</strong> Support local industry competitiveness through improved efficiency</li>
-                </ul>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <h4>Digital Twin</h4>
+                    <p>Real-time simulation</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <h4>Multiple AI</h4>
+                    <p>RL + GA + PSO</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <h4>Coordinated Response</h4>
+                    <p>Proactive downtime prevention</p>
+                </div>
             </div>
         </div>
-        <div class="author-info" style="margin-top: 40px;">
-            <h3>Thank you for your attention</h3>
-            <p>Questions and Discussion</p>
+    </div>
+
+    <!-- Slide 4: Research Objectives -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Research Objectives</h2>
+            <div class="phase-container">
+                <div class="phase-box">
+                    <h4>Objective 1</h4>
+                    <p>Develop digital twin of CUT water bottling plant and establish baseline downtime measurements</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Objective 2</h4>
+                    <p>Implement and evaluate individual AI techniques for downtime reduction</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Objective 3</h4>
+                    <p>Develop ensemble AI model that coordinates multiple techniques</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Objective 4</h4>
+                    <p>Validate and optimize ensemble performance through comprehensive testing</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Research Approach -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Four-Phase Methodology</h2>
+            <div class="phase-container">
+                <div class="method-box">
+                    <h4>Phase 1: Digital Twin Development</h4>
+                    <p>Build high-fidelity simulation of CUT bottling plant, establish baseline downtime metrics</p>
+                </div>
+                <div class="method-box">
+                    <h4>Phase 2: Individual AI Implementation</h4>
+                    <p>Develop RL, GA, and PSO solutions independently, measure individual performance</p>
+                </div>
+                <div class="method-box">
+                    <h4>Phase 3: Ensemble Integration</h4>
+                    <p>Create coordination framework, implement ensemble decision engine</p>
+                </div>
+                <div class="method-box">
+                    <h4>Phase 4: Validation & Optimization</h4>
+                    <p>Test across multiple scenarios, optimize based on downtime reduction results</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Case Study -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Case Study: CUT Water Bottling Plant</h2>
+            <div class="key-points">
+                <div class="point-card">
+                    <span class="icon">🏭</span>
+                    <h4>Real Manufacturing Environment</h4>
+                    <p>3 Smart Manufacturing Units<br>330ml & 500ml bottles</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">💻</span>
+                    <h4>Existing Digital Infrastructure</h4>
+                    <p>Siemens S7-1200 PLC<br>MATLAB/Simulink model</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🔬</span>
+                    <h4>Research Foundation</h4>
+                    <p>Builds on Coetzer et al. & Tshabalala-Kuriakose work</p>
+                </div>
+            </div>
+            <div class="big-text" style="margin-top: 30px;">
+                Perfect testbed for <strong>controlled AI experimentation</strong> with real-world constraints
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Testing Scenarios -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Validation Scenarios</h2>
+            <div class="key-points">
+                <div class="point-card">
+                    <span class="icon">⚡</span>
+                    <h4>Normal Production</h4>
+                    <p>Baseline efficiency measurement and optimization</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">💧</span>
+                    <h4>Tank Depletion</h4>
+                    <p>Water shortage response and adaptive flow control</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🔄</span>
+                    <h4>Mixed Orders</h4>
+                    <p>Dynamic switching between 330ml and 500ml bottles</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🚫</span>
+                    <h4>Equipment Fault</h4>
+                    <p>Capping station failure detection and recovery</p>
+                </div>
+            </div>
+            <div class="objective-box" style="margin-top: 30px;">
+                <div class="big-text">
+                    Primary Metric: <strong>Downtime Reduction</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Expected Outcomes -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Expected Outcomes</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <h4>Scientific Contribution</h4>
+                    <p>First comprehensive ensemble AI framework specifically for downtime reduction in smart manufacturing</p>
+                </div>
+                <div class="result-item">
+                    <h4>Practical Impact</h4>
+                    <p>Validated methodology for local industries to implement AI-driven downtime prevention</p>
+                </div>
+                <div class="result-item">
+                    <h4>Educational Value</h4>
+                    <p>Establish CUT as leader in AI-driven manufacturing research and student training</p>
+                </div>
+                <div class="result-item">
+                    <h4>Innovation Potential</h4>
+                    <p>Scalable framework applicable to various manufacturing environments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Timeline -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>12-Month Research Timeline</h2>
+            <div class="phase-container">
+                <div class="phase-box">
+                    <h4>Months 1-3</h4>
+                    <p><strong>Phase 1:</strong> Digital twin development and baseline establishment</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Months 4-6</h4>
+                    <p><strong>Phase 2:</strong> Individual AI technique implementation and testing</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Months 7-9</h4>
+                    <p><strong>Phase 3:</strong> Ensemble integration and system coordination</p>
+                </div>
+                <div class="phase-box">
+                    <h4>Months 10-12</h4>
+                    <p><strong>Phase 4:</strong> Comprehensive validation and dissertation completion</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Research Impact -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Research Significance</h2>
+            <div class="solution-box">
+                <div class="big-text">
+                    Addressing the critical gap between <strong>individual AI techniques</strong> and <strong>coordinated downtime prevention</strong>
+                </div>
+            </div>
+            <div class="key-points">
+                <div class="point-card">
+                    <span class="icon">🎯</span>
+                    <h4>Targeted Solution</h4>
+                    <p>Specifically designed for downtime reduction, not generic optimization</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🔬</span>
+                    <h4>Real-World Validation</h4>
+                    <p>Tested on actual CUT manufacturing infrastructure</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">📈</span>
+                    <h4>Scalable Framework</h4>
+                    <p>Methodology applicable beyond water bottling to various manufacturing sectors</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Conclusion -->
+    <div class="slide">
+        <div class="center-content">
+            <h2>Key Innovation</h2>
+            <div class="objective-box">
+                <div class="big-text">
+                    <strong>First ensemble AI framework</strong> that coordinates multiple AI techniques through digital twin technology with measurable focus on <strong>downtime reduction</strong>
+                </div>
+            </div>
+            <div class="solution-box" style="margin-top: 40px;">
+                <div class="big-text">
+                    Moving from <strong>reactive problem-solving</strong> to <strong>proactive downtime prevention</strong>
+                </div>
+            </div>
+            <div class="author-info" style="margin-top: 60px;">
+                <h3>Thank you for your attention</h3>
+                <p style="font-size: 1.4em; margin-top: 20px;">Questions and Discussion</p>
+            </div>
         </div>
     </div>
 
     <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">14</span>
+        <span id="current-slide">1</span> / <span id="total-slides">11</span>
     </div>
 
     <div class="navigation">
-        <button class="nav-btn" onclick="previousSlide()">Previous</button>
-        <button class="nav-btn" onclick="nextSlide()">Next</button>
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
     </div>
 
     <script>
@@ -612,17 +610,30 @@
         // Keyboard navigation
         document.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
                 nextSlide();
             } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
                 previousSlide();
+            } else if (event.key === 'Home') {
+                event.preventDefault();
+                showSlide(0);
+            } else if (event.key === 'End') {
+                event.preventDefault();
+                showSlide(totalSlides - 1);
             }
         });
         
-        // Click navigation
+        // Click navigation (click anywhere to advance)
         document.addEventListener('click', function(event) {
             if (!event.target.classList.contains('nav-btn')) {
                 nextSlide();
             }
+        });
+        
+        // Prevent context menu on right click
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
         });
     </script>
 </body>
