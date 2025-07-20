@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Year Research Timeline - Ensemble AI for Downtime Reduction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        
+        .timeline-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .timeline-title {
+            background: #1e40af;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .timeline-table th {
+            background: #2563eb;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1e40af;
+        }
+        
+        .year-header {
+            background: #1e3a8a;
+            font-size: 16px;
+        }
+        
+        .timeline-table td {
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .task-label {
+            background: #f8fafc;
+            text-align: left;
+            font-weight: 500;
+            padding-left: 15px;
+            width: 250px;
+            border-right: 2px solid #1e40af;
+        }
+        
+        .phase-task {
+            background: #e0f2fe;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        /* Activity bars */
+        .activity {
+            height: 20px;
+            border-radius: 10px;
+            position: relative;
+            margin: 2px;
+        }
+        
+        /* Phase colors */
+        .phase1 { background: #3b82f6; }
+        .phase2 { background: #10b981; }
+        .phase3 { background: #f59e0b; }
+        .phase4 { background: #ef4444; }
+        .writing { background: #8b5cf6; }
+        .admin { background: #6b7280; }
+        
+        /* Activity patterns */
+        .primary { opacity: 1; }
+        .secondary { opacity: 0.7; }
+        .ongoing { 
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 3px,
+                rgba(255,255,255,0.3) 3px,
+                rgba(255,255,255,0.3) 6px
+            );
+        }
+        
+        .milestone {
+            background: #dc2626;
+            height: 25px;
+            clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+        }
+        
+        .legend {
+            margin: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .legend h3 {
+            margin: 0 0 10px 0;
+            color: #1e40af;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin: 5px 15px 5px 0;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .empty-cell {
+            background: #f9fafb;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-table {
+                font-size: 12px;
+            }
+            
+            .task-label {
+                width: 200px;
+                padding-left: 10px;
+            }
+            
+            .timeline-table th,
+            .timeline-table td {
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="timeline-title">
+            Ensemble AI for Downtime Reduction in Smart Manufacturing<br>
+            <span style="font-size: 0.8em; opacity: 0.9;">3-Year Master's Research Timeline</span>
+        </div>
+        
+        <table class="timeline-table">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 250px;">Tasks</th>
+                    <th colspan="4" class="year-header">2025</th>
+                    <th colspan="4" class="year-header">2026</th>
+                    <th colspan="4" class="year-header">2027</th>
+                </tr>
+                <tr>
+                    <th>T1</th><th>T2</th><th>T3</th><th>T4</th>
+                    <th>T1</th><th>T2</th><th>T3</th><th>T4</th>
+                    <th>T1</th><th>T2</th><th>T3</th><th>T4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Administrative Tasks -->
+                <tr>
+                    <td class="task-label">Literature review</td>
+                    <td><div class="activity admin primary"></div></td>
+                    <td><div class="activity admin primary"></div></td>
+                    <td><div class="activity admin secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Research proposal</td>
+                    <td><div class="activity admin primary"></div></td>
+                    <td><div class="activity admin primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                
+                <!-- Phase 1: Digital Twin Development -->
+                <tr>
+                    <td class="task-label phase-task">Phase 1: Digital Twin Development</td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">MATLAB/Simulink Model Enhancement</td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Baseline Downtime Measurement</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Digital Twin Validation</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase1 primary"></div></td>
+                    <td><div class="activity phase1 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                
+                <!-- Phase 2: Individual AI Implementation -->
+                <tr>
+                    <td class="task-label phase-task">Phase 2: Individual AI Implementation</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Reinforcement Learning Development</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td><div class="activity phase2 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Genetic Algorithm Implementation</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td><div class="activity phase2 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Particle Swarm Optimization</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td><div class="activity phase2 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Individual AI Performance Testing</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td><div class="activity phase2 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                
+                <!-- Phase 3: Ensemble Integration -->
+                <tr>
+                    <td class="task-label phase-task">Phase 3: Ensemble Integration</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td><div class="activity phase3 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Coordination Framework Development</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Ensemble Decision Engine</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">System Integration Testing</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase3 secondary"></div></td>
+                    <td><div class="activity phase3 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                
+                <!-- Phase 4: Validation -->
+                <tr>
+                    <td class="task-label phase-task">Phase 4: Comprehensive Validation</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td><div class="activity phase4 secondary"></div></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Testing Scenarios (All 4 Scenarios)</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Performance Analysis & Optimization</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td><div class="activity phase4 primary"></div></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                
+                <!-- Writing and Publications -->
+                <tr>
+                    <td class="task-label">Conference presentations</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity writing primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity writing primary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Journal papers</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity writing secondary"></div></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity writing primary"></div></td>
+                    <td><div class="activity writing primary"></div></td>
+                    <td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Dissertation writing</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="activity writing ongoing"></div></td>
+                    <td><div class="activity writing primary"></div></td>
+                    <td><div class="activity writing primary"></div></td>
+                </tr>
+                <tr>
+                    <td class="task-label">Submission of thesis</td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td><div class="milestone"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="legend">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <span class="legend-color phase1"></span>
+            Phase 1: Digital Twin Development
+        </div>
+        <div class="legend-item">
+            <span class="legend-color phase2"></span>
+            Phase 2: Individual AI Implementation
+        </div>
+        <div class="legend-item">
+            <span class="legend-color phase3"></span>
+            Phase 3: Ensemble Integration
+        </div>
+        <div class="legend-item">
+            <span class="legend-color phase4"></span>
+            Phase 4: Validation & Testing
+        </div>
+        <div class="legend-item">
+            <span class="legend-color writing"></span>
+            Writing & Publications
+        </div>
+        <div class="legend-item">
+            <span class="legend-color admin"></span>
+            Administrative Tasks
+        </div>
+        <div class="legend-item">
+            <span class="legend-color milestone" style="clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);"></span>
+            Major Milestone
+        </div>
+    </div>
+    
+    <div style="margin: 20px; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <h3 style="color: #1e40af; margin-top: 0;">Key Deliverables by Phase</h3>
+        <p><strong>Phase 1 (T2-T4 2025):</strong> Enhanced MATLAB/Simulink digital twin model, baseline downtime measurements, validated system accuracy</p>
+        <p><strong>Phase 2 (T1-T2 2026):</strong> Individual RL, GA, and PSO implementations, performance benchmarks for each technique</p>
+        <p><strong>Phase 3 (T3 2026-T1 2027):</strong> Ensemble coordination framework, integrated AI decision engine, system integration validation</p>
+        <p><strong>Phase 4 (T1-T3 2027):</strong> Comprehensive scenario testing results, optimized ensemble performance, statistical validation</p>
+    </div>
+</body>
+</html>
