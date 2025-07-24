@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downtime Timeline & AI Response Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Manufacturing Downtime Timeline & AI Response Analysis</h1>
+            <p>Real-time monitoring of ensemble AI decision-making in smart manufacturing environments</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="timeline-container">
+                <h2 style="margin-bottom: 20px; color: #4ecdc4;">⏱️ System Event Timeline</h2>
+                <div class="timeline" id="timeline">
+                    <!-- Timeline events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" style="color: #4CAF50;" id="uptime-metric">97.3%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" style="color: #f44336;" id="downtime-metric">2.7%</div>
+                        <div class="metric-label">Total Downtime</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" style="color: #FF9800;" id="mttr-metric">4.2 min</div>
+                        <div class="metric-label">Avg MTTR</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" style="color: #2196F3;" id="interventions-metric">23</div>
+                        <div class="metric-label">AI Interventions</div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🎮 Simulation Controls</h3>
+                    <button class="scenario-btn tank-depletion" onclick="simulateScenario('tank')">
+                        💧 Tank Depletion Crisis
+                    </button>
+                    <button class="scenario-btn equipment-fault" onclick="simulateScenario('equipment')">
+                        ⚙️ Equipment Malfunction
+                    </button>
+                    <button class="scenario-btn order-surge" onclick="simulateScenario('surge')">
+                        📈 Order Surge Event
+                    </button>
+                    <button class="scenario-btn reset" onclick="resetTimeline()">
+                        🔄 Reset Timeline
+                    </button>
+                </div>
+
+                <div class="ai-technique-status">
+                    <h3 style="color: #4ecdc4; margin-bottom: 15px;">🤖 AI Ensemble Status</h3>
+                    <div class="technique">
+                        <span class="technique-name">Reinforcement Learning</span>
+                        <span class="technique-status status-active" id="rl-status">ACTIVE</span>
+                    </div>
+                    <div class="technique">
+                        <span class="technique-name">Genetic Algorithm</span>
+                        <span class="technique-status status-optimizing" id="ga-status">OPTIMIZING</span>
+                    </div>
+                    <div class="technique">
+                        <span class="technique-name">Particle Swarm Opt.</span>
+                        <span class="technique-status status-learning" id="pso-status">LEARNING</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="performance-chart">
+            <h2 style="margin-bottom: 20px; color: #4ecdc4; text-align: center;">📈 Downtime Reduction Performance</h2>
+            <div class="chart-container" id="chart-container">
+                <!-- Chart bars will be populated by JavaScript -->
+            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(to right, #ff6b6b, #4ecdc4);"></div>
+                    <span>AI-Optimized Response Time</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #666;"></div>
+                    <span>Traditional Response Time</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

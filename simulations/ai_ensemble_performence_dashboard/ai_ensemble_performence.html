@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ensemble Performance Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🤖 AI Ensemble Performance Dashboard</h1>
+            <p>Digital Twin-Based Decision Support System for Smart Manufacturing</p>
+            <p style="font-size: 0.9em; opacity: 0.7; margin-top: 5px;">Water Bottling Plant - Central University of Technology Case Study</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card" style="--accent-color: #4CAF50; --accent-color-rgb: 76, 175, 80;">
+                <div class="kpi-value" id="system-efficiency">94.7%</div>
+                <div class="kpi-label">System Efficiency</div>
+                <div class="kpi-trend trend-up">
+                    <span>↗</span> +2.3% vs baseline
+                </div>
+            </div>
+
+            <div class="kpi-card" style="--accent-color: #2196F3; --accent-color-rgb: 33, 150, 243;">
+                <div class="kpi-value" id="throughput">1,742</div>
+                <div class="kpi-label">Bottles/Hour</div>
+                <div class="kpi-trend trend-up">
+                    <span>↗</span> +62 bottles/hr
+                </div>
+            </div>
+
+            <div class="kpi-card" style="--accent-color: #f44336; --accent-color-rgb: 244, 67, 54;">
+                <div class="kpi-value" id="downtime">2.1%</div>
+                <div class="kpi-label">Total Downtime</div>
+                <div class="kpi-trend trend-down">
+                    <span>↘</span> -65% reduction
+                </div>
+            </div>
+
+            <div class="kpi-card" style="--accent-color: #FF9800; --accent-color-rgb: 255, 152, 0;">
+                <div class="kpi-value" id="mttr">3.4</div>
+                <div class="kpi-label">MTTR (Minutes)</div>
+                <div class="kpi-trend trend-down">
+                    <span>↘</span> -78% vs traditional
+                </div>
+            </div>
+
+            <div class="kpi-card" style="--accent-color: #9C27B0; --accent-color-rgb: 156, 39, 176;">
+                <div class="kpi-value" id="quality-score">98.9%</div>
+                <div class="kpi-label">Quality Score</div>
+                <div class="kpi-trend trend-up">
+                    <span>↗</span> +1.2% improvement
+                </div>
+            </div>
+
+            <div class="kpi-card" style="--accent-color: #4ecdc4; --accent-color-rgb: 78, 205, 196;">
+                <div class="kpi-value" id="ai-interventions">47</div>
+                <div class="kpi-label">AI Interventions</div>
+                <div class="kpi-trend">
+                    <span>→</span> Real-time responses
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>🧠</span> AI Ensemble Coordination
+            </div>
+            <div class="ai-ensemble">
+                <div class="ai-technique active" style="--technique-color: #00BCD4; --technique-color-rgb: 0, 188, 212;">
+                    <h4>🎯 Reinforcement Learning</h4>
+                    <p style="font-size: 0.8em;">Real-time flow optimization</p>
+                    <div class="technique-status" id="rl-technique-status">OPTIMIZING</div>
+                </div>
+                
+                <div class="ai-technique active" style="--technique-color: #4CAF50; --technique-color-rgb: 76, 175, 80;">
+                    <h4>🧬 Genetic Algorithm</h4>
+                    <p style="font-size: 0.8em;">Schedule optimization</p>
+                    <div class="technique-status" id="ga-technique-status">EVOLVING</div>
+                </div>
+                
+                <div class="ai-technique active" style="--technique-color: #FF9800; --technique-color-rgb: 255, 152, 0;">
+                    <h4>🐝 Particle Swarm</h4>
+                    <p style="font-size: 0.8em;">Parameter tuning</p>
+                    <div class="technique-status" id="pso-technique-status">CONVERGING</div>
+                </div>
+            </div>
+
+            <div class="comparison-chart" style="display: flex; justify-content: center; gap: 60px; align-items: flex-end; margin-top: 30px;">
+                <div class="chart-section" style="text-align: center;">
+                    <h4 style="margin-bottom: 8px;">Traditional Approach</h4><br>
+                    <div class="chart-bar" style="--bar-color: #666; --bar-color-rgb: 102, 102, 102; height: 80px; width: 100px; display: flex; align-items: flex-end; justify-content: center; border-radius: 8px; background: linear-gradient(to top, #666 80%, #bbb 100%); margin: 0 auto;">
+                        <div class="chart-value" style="font-weight: bold; color: #fff; margin-bottom: 8px;">15.2 min</div>
+                    </div>
+                    <div class="chart-label" style="margin-top: 10px;">Avg Response Time</div>
+                </div>
+                
+                <div class="chart-section" style="text-align: center;">
+                    <h4 style="margin-bottom: 8px;">AI Ensemble</h4><br>
+                    <div class="chart-bar" style="--bar-color: #4CAF50; --bar-color-rgb: 76, 175, 80; height: 25px; width: 100px; display: flex; align-items: flex-end; justify-content: center; border-radius: 8px; background: linear-gradient(to top, #4CAF50 80%, #a5d6a7 100%); margin: 0 auto;">
+                        <div class="chart-value" style="font-weight: bold; color: #fff; margin-bottom: 8px;">3.4 min</div>
+                    </div>
+                    <div class="chart-label" style="margin-top: 10px;">Avg Response Time</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>⚡</span> System Performance
+            </div>
+            <div class="performance-meter">
+                <div class="meter-background">
+                    <div class="meter-inner">
+                        <div class="meter-value" id="overall-performance">94.7%</div>
+                        <div class="meter-label">Overall Performance</div>
+                    </div>
+                    <div class="meter-needle" style="--needle-angle: 135deg;"></div>
+                </div>
+            </div>
+
+            <div class="production-flow">
+                <div class="flow-stage">
+                    <div class="flow-icon active" style="background: rgba(33, 150, 243, 0.2); color: #2196F3;">💧</div>
+                    <div style="font-size: 0.8em;">Source & Tank</div>
+                    <div style="font-size: 0.7em; opacity: 0.7;">98.5%</div>
+                </div>
+                
+                <div class="flow-arrow">→</div>
+                
+                <div class="flow-stage">
+                    <div class="flow-icon active" style="background: rgba(255, 152, 0, 0.2); color: #FF9800;">🍼</div>
+                    <div style="font-size: 0.8em;">Bottle Storage</div>
+                    <div style="font-size: 0.7em; opacity: 0.7;">91.2%</div>
+                </div>
+                
+                <div class="flow-arrow">→</div>
+                
+                <div class="flow-stage">
+                    <div class="flow-icon active" style="background: rgba(76, 175, 80, 0.2); color: #4CAF50;">⚙️</div>
+                    <div style="font-size: 0.8em;">Fill & Package</div>
+                    <div style="font-size: 0.7em; opacity: 0.7;">94.8%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>🔔</span> Real-time Alerts
+            </div>
+            <div class="alert-panel" id="alert-panel">
+                <div class="alert-item info">
+                    <div class="alert-time">14:23:15</div>
+                    <div class="alert-message">🤖 AI Ensemble: Optimal flow rate calculated - 248 L/min</div>
+                </div>
+                <div class="alert-item success">
+                    <div class="alert-time">14:21:47</div>
+                    <div class="alert-message">✅ Quality check passed: 99.2% accuracy maintained</div>
+                </div>
+                <div class="alert-item warning">
+                    <div class="alert-time">14:19:32</div>
+                    <div class="alert-message">⚠️ 500ml bottle stock: 1,247 units (threshold: 1,200)</div>
+                </div>
+            </div>
+
+            <div class="control-buttons">
+                <button class="btn btn-primary" onclick="optimizeProduction()">🚀 Optimize Production</button>
+                <button class="btn btn-warning" onclick="schedulePreventiveMaintenance()">🔧 Schedule Maintenance</button>
+                <button class="btn btn-info" onclick="generateReport()">📊 Generate Report</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>📈</span> Optimization Timeline
+            </div>
+            <div class="optimization-timeline" id="optimization-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background: #4CAF50;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">14:23:15</div>
+                        <div class="timeline-action">RL Agent: Flow rate optimized to 248 L/min</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background: #2196F3;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">14:22:03</div>
+                        <div class="timeline-action">GA: Production schedule updated for mixed orders</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background: #FF9800;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">14:20:41</div>
+                        <div class="timeline-action">PSO: Quality threshold parameters refined</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-stream" id="data-stream">
+                <div class="data-line">[14:23:15] RL_AGENT: reward=0.847, action=reduce_flow_rate, state=optimal</div>
+                <div class="data-line">[14:23:12] GA_OPTIMIZER: generation=47, fitness=0.923, mutation_rate=0.05</div>
+                <div class="data-line">[14:23:08] PSO_SWARM: iteration=156, gbest=0.891, convergence=0.98</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>🎯</span> Performance Comparison
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h4>Downtime Reduction Analysis</h4>
+                <p style="font-size: 0.9em; opacity: 0.8;">Ensemble AI vs Traditional Methods</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                <div style="text-align: center; padding: 15px; background: rgba(244, 67, 54, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.8em; font-weight: bold; color: #f44336;">15.2 min</div>
+                    <div style="font-size: 0.8em; opacity: 0.8;">Traditional MTTR</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.8em; font-weight: bold; color: #4CAF50;">3.4 min</div>
+                    <div style="font-size: 0.8em; opacity: 0.8;">AI Ensemble MTTR</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: rgba(33, 150, 243, 0.1); border-radius: 8px;">
+                    <div style="font-size: 1.8em; font-weight: bold; color: #2196F3;">78%</div>
+                    <div style="font-size: 0.8em; opacity: 0.8;">Improvement</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 15px;">
+                <h5 style="margin-bottom: 10px; color: #4ecdc4;">Key Benefits:</h5>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 5px 0; padding-left: 20px;">✅ 65% reduction in system downtime</li>
+                    <li style="margin: 5px 0; padding-left: 20px;">✅ 78% faster issue resolution</li>
+                    <li style="margin: 5px 0; padding-left: 20px;">✅ 23% improvement in production efficiency</li>
+                    <li style="margin: 5px 0; padding-left: 20px;">✅ Predictive maintenance scheduling</li>
+                    <li style="margin: 5px 0; padding-left: 20px;">✅ Real-time adaptive optimization</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

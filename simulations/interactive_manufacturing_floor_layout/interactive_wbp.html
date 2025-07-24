@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Bottling Plant - Digital Twin Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 Digital Twin-Based Decision Support System</h1>
+            <p>Water Bottling Plant - CUT Case Study | Real-time Monitoring & AI-Driven Optimization</p>
+        </div>
+
+        <div class="plant-layout">
+            <h2 style="text-align: center; margin-bottom: 30px;">🔄 Smart Manufacturing Units (SMUs)</h2>
+            
+            <div class="production-units">
+                <div class="unit operational" id="unit1">
+                    <div class="unit-header">
+                        <div class="unit-icon" style="background: rgba(33, 150, 243, 0.2);">💧</div>
+                        <div>
+                            <h3>Source & Tank Unit <span class="status-indicator"></span></h3>
+                            <p>Water Supply & Pumping System</p>
+                        </div>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-label">Water Level</div>
+                            <div class="metric-value" id="water-level">85%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Flow Rate</div>
+                            <div class="metric-value" id="flow-rate">250 L/min</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Pump Status</div>
+                            <div class="metric-value">Active</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Temperature</div>
+                            <div class="metric-value" id="water-temp">18°C</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-indicators">
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="unit warning" id="unit2">
+                    <div class="unit-header">
+                        <div class="unit-icon" style="background: rgba(255, 152, 0, 0.2);">🍼</div>
+                        <div>
+                            <h3>Bottle Storage Unit <span class="status-indicator"></span></h3>
+                            <p>330ml & 500ml Bottle Management</p>
+                        </div>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-label">330ml Stock</div>
+                            <div class="metric-value" id="bottle-330">1,250</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">500ml Stock</div>
+                            <div class="metric-value" id="bottle-500">890</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Selection Rate</div>
+                            <div class="metric-value">45 bottles/min</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Alert</div>
+                            <div class="metric-value" style="color: #FF9800;">Low 500ml</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-indicators">
+                    <div class="flow-arrow">→</div>
+                </div>
+
+                <div class="unit operational" id="unit3">
+                    <div class="unit-header">
+                        <div class="unit-icon" style="background: rgba(76, 175, 80, 0.2);">⚙️</div>
+                        <div>
+                            <h3>Filling & Packaging Unit <span class="status-indicator"></span></h3>
+                            <p>Filling, Capping & Quality Control</p>
+                        </div>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-label">Fill Accuracy</div>
+                            <div class="metric-value">99.8%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Capping Rate</div>
+                            <div class="metric-value">42 caps/min</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Quality Score</div>
+                            <div class="metric-value">98.5%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Output Rate</div>
+                            <div class="metric-value" id="output-rate">1,680 bottles/hr</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-ensemble-panel">
+            <h2 style="text-align: center; margin-bottom: 20px;">🤖 Ensemble AI Decision Support System</h2>
+            
+            <div class="ai-techniques">
+                <div class="ai-technique rl">
+                    <h4>🧠 Reinforcement Learning</h4>
+                    <p>Real-time flow optimization and adaptive scheduling</p>
+                    <div style="margin-top: 10px;">
+                        <strong>Status:</strong> <span id="rl-status">Learning optimal pump sequences</span>
+                    </div>
+                </div>
+                
+                <div class="ai-technique ga">
+                    <h4>🧬 Genetic Algorithm</h4>
+                    <p>Production schedule optimization and order fulfillment</p>
+                    <div style="margin-top: 10px;">
+                        <strong>Status:</strong> <span id="ga-status">Optimizing mixed order sequences</span>
+                    </div>
+                </div>
+                
+                <div class="ai-technique pso">
+                    <h4>🐝 Particle Swarm Optimization</h4>
+                    <p>Resource allocation and parameter tuning</p>
+                    <div style="margin-top: 10px;">
+                        <strong>Status:</strong> <span id="pso-status">Calibrating system parameters</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <h3 style="margin-bottom: 20px;">🎛️ System Control Panel</h3>
+            
+            <div class="control-row">
+                <div class="control-group">
+                    <button class="btn btn-start" onclick="startProduction()">▶️ Start Production</button>
+                    <button class="btn btn-stop" onclick="stopProduction()">⏹️ Emergency Stop</button>
+                    <button class="btn btn-maintenance" onclick="scheduleMaintenace()">🔧 Schedule Maintenance</button>
+                </div>
+                
+                <div class="control-group">
+                    <label>Production Mode:</label>
+                    <select style="padding: 8px; border-radius: 4px;" onchange="changeMode(this.value)">
+                        <option value="auto">Automatic (AI-Driven)</option>
+                        <option value="manual">Manual Override</option>
+                        <option value="maintenance">Maintenance Mode</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="performance-metrics">
+            <div class="metric-card">
+                <div class="metric-number" style="color: #4CAF50;" id="uptime">97.3%</div>
+                <div>System Uptime</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-number" style="color: #2196F3;" id="throughput">1,680</div>
+                <div>Bottles/Hour</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-number" style="color: #FF9800;" id="efficiency">94.7%</div>
+                <div>Overall Efficiency</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-number" style="color: #9C27B0;" id="downtime">2.7%</div>
+                <div>Downtime</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-number" style="color: #F44336;" id="orders-completed">1,247</div>
+                <div>Orders Completed</div>
+            </div>
+        </div>
+
+        <div class="downtime-simulation">
+            <h3>⚠️ Downtime Simulation Scenarios</h3>
+            <p>Test AI ensemble response to various manufacturing challenges</p>
+            
+            <div class="simulation-controls">
+                <button class="btn" style="background: #FF5722;" onclick="simulateDowntime('tank')">Tank Depletion</button>
+                <button class="btn" style="background: #607D8B;" onclick="simulateDowntime('equipment')">Equipment Fault</button>
+                <button class="btn" style="background: #795548;" onclick="simulateDowntime('surge')">Order Surge</button>
+                <button class="btn" style="background: #3F51B5;" onclick="resetSimulation()">Reset System</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+   
+</body>
+</html>
