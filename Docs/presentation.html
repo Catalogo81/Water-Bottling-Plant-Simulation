@@ -3,474 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ensemble AI for Reducing Downtime in Smart Manufacturing</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e3a8a 100%);
-            color: white;
-            overflow: hidden;
-        }
-        
-        .slide {
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            position: relative;
-            background: rgba(0,0,0,0.1);
-        }
-        
-        .slide.active {
-            display: flex;
-        }
-        
-        .slide h1 {
-            font-size: 3.2em;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            line-height: 1.1;
-            max-width: 1200px;
-        }
-        
-        .slide h2 {
-            font-size: 2.6em;
-            margin-bottom: 35px;
-            text-align: center;
-            color: #fbbf24;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-            font-weight: 600;
-        }
-        
-        .slide h3 {
-            font-size: 2.0em;
-            margin-bottom: 25px;
-            color: #60a5fa;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-            font-weight: 600;
-        }
-        
-        .subtitle {
-            font-size: 1.6em;
-            margin-top: 25px;
-            text-align: center;
-            opacity: 0.9;
-            font-style: italic;
-            font-weight: 300;
-        }
-        
-        .author-info {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 1.2em;
-            opacity: 0.85;
-            line-height: 1.6;
-        }
-        
-        .big-text {
-            font-size: 2.2em;
-            text-align: center;
-            line-height: 1.4;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .problem-box {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 30px 0;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .solution-box {
-            background: linear-gradient(135deg, #059669, #10b981);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 30px 0;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .objective-box {
-            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 30px 0;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .method-box {
-            background: linear-gradient(135deg, #ea580c, #f97316);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .phase-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        .phase-box {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-        }
-        
-        .phase-box h4 {
-            color: #fbbf24;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.4);
-            color: white;
-            padding: 15px 25px;
-            margin: 0 8px;
-            cursor: pointer;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.05);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-        }
-        
-        .slide-counter {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            font-size: 1.3em;
-            font-weight: 600;
-            background: rgba(0,0,0,0.3);
-            padding: 10px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .key-points {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 30px 0;
-        }
-        
-        .point-card {
-            background: rgba(255,255,255,0.15);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .point-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .point-card .icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .point-card h4 {
-            font-size: 1.4em;
-            margin-bottom: 10px;
-            color: #fbbf24;
-        }
-        
-        .point-card p {
-            font-size: 1.1em;
-            line-height: 1.4;
-            opacity: 0.9;
-        }
-        
-        .flow-diagram {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1000px;
-            margin: 30px 0;
-        }
-        
-        .flow-step {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            min-width: 200px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        
-        .flow-arrow {
-            font-size: 2em;
-            color: #fbbf24;
-            margin: 0 15px;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            width: 100%;
-            max-width: 1000px;
-            margin: 30px 0;
-        }
-        
-        .result-item {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .result-item h4 {
-            color: #10b981;
-            font-size: 1.6em;
-            margin-bottom: 15px;
-        }
-        
-        .metric {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #fbbf24;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .center-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100%;
-        }
-    </style>
+    <title>Digital Twin based Decision Support System using Ensemble AI for Downtime Reduction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../presentation.css">
 </head>
 <body>
-    <!-- Slide 1: Title -->
+    <!-- Slide 1: Title - Using background image -->
     <div class="slide active">
-        <div class="center-content">
-            <h1>Developing an Ensemble AI Model for<br>Reducing Downtime in Smart Manufacturing</h1>
-            <div class="subtitle">Master of Information Technology Research Proposal</div>
-            <div class="author-info">
-                <strong>Kgotso Matjato</strong><br>
-                Supervisor: Dr. J Coetzer | Co-supervisor: Prof. R.B. Kuriakose<br>
-                Faculty of Engineering, Built Environment and Information Technology<br>
-                Central University of Technology, Free State
-            </div>
-        </div>
+        <!-- Content will be provided by background image -->
     </div>
 
-    <!-- Slide 2: The Problem -->
+    <!-- Slide 2: Updated Problem Statement -->
     <div class="slide">
         <div class="center-content">
             <h2>The Problem</h2>
             <div class="problem-box">
                 <div class="big-text">
-                    <strong>System downtime in smart manufacturing</strong> costs industries billions annually
+                    Modern smart manufacturing environments face challenges in achieving <strong>optimal dynamic decision-making</strong> to reduce system downtime
                 </div>
             </div>
             <div class="key-points">
                 <div class="point-card">
-                    <span class="icon">⚠️</span>
-                    <h4>Isolated AI Systems</h4>
-                    <p>Current AI operates without coordination</p>
-                </div>
-                <div class="point-card">
-                    <span class="icon">⏱️</span>
-                    <h4>Reactive Responses</h4>
-                    <p>Systems respond to problems after they occur</p>
-                </div>
-                <div class="point-card">
-                    <span class="icon">🔧</span>
+                    <span class="icon">🔄</span>
                     <h4>Limited Adaptability</h4>
-                    <p>Struggle with dynamic production variations</p>
+                    <p>Current AI implementations operate with limited adaptability to real-time production variations</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">⚡</span>
+                    <h4>Isolated Operations</h4>
+                    <p>DT and AI systems often operate in isolation without coordinated decision-making</p>
+                </div>
+                <div class="point-card">
+                    <span class="icon">🎯</span>
+                    <h4>Multi-Agent Coordination Gap</h4>
+                    <p>Lack sophisticated multi-agent coordination capabilities for downtime reduction</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 3: Our Solution -->
+    <!-- Slide 3: Updated Solution -->
     <div class="slide">
         <div class="center-content">
             <h2>Our Solution</h2>
             <div class="solution-box">
                 <div class="big-text">
-                    <strong>Ensemble AI Model</strong> that coordinates multiple AI techniques to predict and prevent downtime
+                    <strong>Digital Twin based Decision Support System</strong> using ensemble AI techniques to coordinate real-time downtime prevention
                 </div>
             </div>
             <div class="flow-diagram">
                 <div class="flow-step">
-                    <h4>Digital Twin</h4>
-                    <p>Real-time simulation</p>
+                    <h4>Digital Twin Foundation</h4>
+                    <p>Real-time simulation and monitoring</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
-                    <h4>Multiple AI</h4>
-                    <p>RL + GA + PSO</p>
+                    <h4>Ensemble AI</h4>
+                    <p>RL + GA + PSO coordination</p>
                 </div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-step">
-                    <h4>Coordinated Response</h4>
-                    <p>Proactive downtime prevention</p>
+                    <h4>Decision Support</h4>
+                    <p>Proactive downtime reduction</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: Research Objectives -->
+    <!-- Slide 4: Updated Research Objectives -->
     <div class="slide">
         <div class="center-content">
             <h2>Research Objectives</h2>
             <div class="phase-container">
                 <div class="phase-box">
                     <h4>Objective 1</h4>
-                    <p>Develop digital twin of CUT water bottling plant and establish baseline downtime measurements</p>
+                    <p>Develop a digital twin model that simulates a smart manufacturing environment through a case study, to establish baseline downtime measurements</p>
                 </div>
                 <div class="phase-box">
                     <h4>Objective 2</h4>
-                    <p>Implement and evaluate individual AI techniques for downtime reduction</p>
+                    <p>Investigate and implement AI techniques (RL, GA, PSO) within the digital twin framework for reducing system downtime</p>
                 </div>
                 <div class="phase-box">
                     <h4>Objective 3</h4>
-                    <p>Develop ensemble AI model that coordinates multiple techniques</p>
+                    <p>Develop and evaluate an ensemble AI model that coordinates multiple AI techniques for optimal downtime reduction</p>
                 </div>
                 <div class="phase-box">
                     <h4>Objective 4</h4>
-                    <p>Validate and optimize ensemble performance through comprehensive testing</p>
+                    <p>Validate the ensemble AI model through comprehensive testing scenarios and optimize based on performance results</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 5: Research Approach -->
+    <!-- Slide 5: Four-Phase Methodology -->
     <div class="slide">
         <div class="center-content">
             <h2>Four-Phase Methodology</h2>
             <div class="phase-container">
                 <div class="method-box">
-                    <h4>Phase 1: Digital Twin Development</h4>
-                    <p>Build high-fidelity simulation of CUT bottling plant, establish baseline downtime metrics</p>
+                    <h4 class="method-title">Phase 1: Digital Twin Development</h4>
+                    <p class="method-description">Build high-fidelity simulation of CUT bottling plant, establish baseline downtime metrics and validate accuracy</p>
                 </div>
                 <div class="method-box">
-                    <h4>Phase 2: Individual AI Implementation</h4>
-                    <p>Develop RL, GA, and PSO solutions independently, measure individual performance</p>
+                    <h4 class="method-title">Phase 2: Individual AI Implementation</h4>
+                    <p class="method-description">Develop RL, GA, and PSO solutions independently, measure individual performance and create benchmarks</p>
                 </div>
                 <div class="method-box">
-                    <h4>Phase 3: Ensemble Integration</h4>
-                    <p>Create coordination framework, implement ensemble decision engine</p>
+                    <h4 class="method-title">Phase 3: Ensemble Integration</h4>
+                    <p class="method-description">Create coordination framework, implement ensemble decision engine, and integrate systems</p>
                 </div>
                 <div class="method-box">
-                    <h4>Phase 4: Validation & Optimization</h4>
-                    <p>Test across multiple scenarios, optimize based on downtime reduction results</p>
+                    <h4 class="method-title">Phase 4: Validation & Optimization</h4>
+                    <p class="method-description">Test across multiple scenarios, optimize based on downtime reduction results, and perform statistical analysis</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 6: Case Study -->
+    <!-- Slide 6: Case Study: CUT Water Bottling Plant -->
     <div class="slide">
         <div class="center-content">
             <h2>Case Study: CUT Water Bottling Plant</h2>
             <div class="key-points">
                 <div class="point-card">
                     <span class="icon">🏭</span>
-                    <h4>Real Manufacturing Environment</h4>
-                    <p>3 Smart Manufacturing Units<br>330ml & 500ml bottles</p>
+                    <h4>Three Smart Manufacturing Units</h4>
+                    <p>Source/Tank, Bottle Manufacturing/Storage, Filling/Packaging Units</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">💻</span>
                     <h4>Existing Digital Infrastructure</h4>
-                    <p>Siemens S7-1200 PLC<br>MATLAB/Simulink model</p>
+                    <p>Siemens S7-1200 PLC control with MATLAB/Simulink digital twin model</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">🔬</span>
                     <h4>Research Foundation</h4>
-                    <p>Builds on Coetzer et al. & Tshabalala-Kuriakose work</p>
+                    <p>Builds on established work by Coetzer et al. & Tshabalala-Kuriakose</p>
                 </div>
             </div>
             <div class="big-text" style="margin-top: 30px;">
-                Perfect testbed for <strong>controlled AI experimentation</strong> with real-world constraints
+                Perfect testbed for <strong>ensemble AI experimentation</strong> with real manufacturing constraints
             </div>
         </div>
     </div>
 
-    <!-- Slide 7: Testing Scenarios -->
+    <!-- Slide 7: Validation Scenarios -->
     <div class="slide">
         <div class="center-content">
-            <h2>Validation Scenarios</h2>
+            <h2>Comprehensive Validation Scenarios</h2>
             <div class="key-points">
                 <div class="point-card">
                     <span class="icon">⚡</span>
                     <h4>Normal Production</h4>
-                    <p>Baseline efficiency measurement and optimization</p>
+                    <p>Baseline efficiency measurement and ensemble coordination testing</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">💧</span>
-                    <h4>Tank Depletion</h4>
-                    <p>Water shortage response and adaptive flow control</p>
+                    <h4>Tank Level Depletion</h4>
+                    <p>Water shortage response and adaptive flow control coordination</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">🔄</span>
-                    <h4>Mixed Orders</h4>
-                    <p>Dynamic switching between 330ml and 500ml bottles</p>
+                    <h4>Mixed Order Surge</h4>
+                    <p>Dynamic switching between 330ml and 500ml bottle production</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">🚫</span>
                     <h4>Equipment Fault</h4>
-                    <p>Capping station failure detection and recovery</p>
+                    <p>Capping station failure detection, response, and recovery coordination</p>
                 </div>
             </div>
             <div class="objective-box" style="margin-top: 30px;">
                 <div class="big-text">
-                    Primary Metric: <strong>Downtime Reduction</strong>
+                    Primary Focus: <strong>System Downtime Reduction</strong> through coordinated AI decision-making
                 </div>
             </div>
         </div>
@@ -482,98 +187,82 @@
             <h2>Expected Outcomes</h2>
             <div class="results-grid">
                 <div class="result-item">
-                    <h4>Scientific Contribution</h4>
-                    <p>First comprehensive ensemble AI framework specifically for downtime reduction in smart manufacturing</p>
+                    <h4>Master's Degree Completion</h4>
+                    <p>Master of Information Technology (M.ITEC) degree focused on ensemble AI for smart manufacturing downtime reduction</p>
                 </div>
                 <div class="result-item">
-                    <h4>Practical Impact</h4>
-                    <p>Validated methodology for local industries to implement AI-driven downtime prevention</p>
+                    <h4>Validated Framework</h4>
+                    <p>Comprehensive ensemble AI methodology specifically for downtime reduction in smart manufacturing</p>
                 </div>
                 <div class="result-item">
-                    <h4>Educational Value</h4>
-                    <p>Establish CUT as leader in AI-driven manufacturing research and student training</p>
+                    <h4>Empirical Data & Publications</h4>
+                    <p>Performance comparison data with journal article and conference paper detailing validated framework and results</p>
                 </div>
                 <div class="result-item">
-                    <h4>Innovation Potential</h4>
-                    <p>Scalable framework applicable to various manufacturing environments</p>
+                    <h4>Digital Twin Integration Guidelines</h4>
+                    <p>Practical implementation guidelines for AI-DT systems integration in manufacturing environments</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 9: Timeline -->
+    <!-- Slide 9: Research Timeline -->
     <div class="slide">
         <div class="center-content">
-            <h2>12-Month Research Timeline</h2>
+            <h2>Research Timeline</h2>
             <div class="phase-container">
                 <div class="phase-box">
-                    <h4>Months 1-3</h4>
-                    <p><strong>Phase 1:</strong> Digital twin development and baseline establishment</p>
+                    <h4>Trimesters 2-4, 2025</h4>
+                    <p><strong>Phase 1:</strong> Digital twin development, baseline measurements, and system validation</p>
                 </div>
                 <div class="phase-box">
-                    <h4>Months 4-6</h4>
-                    <p><strong>Phase 2:</strong> Individual AI technique implementation and testing</p>
+                    <h4>Trimesters 1-2, 2026</h4>
+                    <p><strong>Phase 2:</strong> Individual AI technique implementation and performance benchmarking</p>
                 </div>
                 <div class="phase-box">
-                    <h4>Months 7-9</h4>
-                    <p><strong>Phase 3:</strong> Ensemble integration and system coordination</p>
+                    <h4>Trimesters 3-4, 2026</h4>
+                    <p><strong>Phase 3:</strong> Ensemble integration, coordination framework, and system testing</p>
                 </div>
                 <div class="phase-box">
-                    <h4>Months 10-12</h4>
-                    <p><strong>Phase 4:</strong> Comprehensive validation and dissertation completion</p>
+                    <h4>Trimesters 1-3, 2027</h4>
+                    <p><strong>Phase 4:</strong> Comprehensive validation, optimization, and dissertation completion</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 10: Research Impact -->
+    <!-- Slide 10: Research Significance -->
     <div class="slide">
         <div class="center-content">
             <h2>Research Significance</h2>
             <div class="solution-box">
                 <div class="big-text">
-                    Addressing the critical gap between <strong>individual AI techniques</strong> and <strong>coordinated downtime prevention</strong>
+                    Addressing the critical gap in <strong>systematic integration</strong> of digital twins with ensemble AI techniques for <strong>downtime reduction</strong>
                 </div>
             </div>
             <div class="key-points">
                 <div class="point-card">
                     <span class="icon">🎯</span>
                     <h4>Targeted Solution</h4>
-                    <p>Specifically designed for downtime reduction, not generic optimization</p>
+                    <p>Specifically designed for downtime reduction, not generic manufacturing optimization</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">🔬</span>
                     <h4>Real-World Validation</h4>
-                    <p>Tested on actual CUT manufacturing infrastructure</p>
+                    <p>Tested on actual CUT manufacturing infrastructure with measurable outcomes</p>
                 </div>
                 <div class="point-card">
                     <span class="icon">📈</span>
-                    <h4>Scalable Framework</h4>
-                    <p>Methodology applicable beyond water bottling to various manufacturing sectors</p>
+                    <h4>Proactive Approach</h4>
+                    <p>Moving from reactive problem-solving to proactive downtime prevention</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 11: Conclusion -->
+    <!-- Slide 11: Thank You - Using background image -->
     <div class="slide">
-        <div class="center-content">
-            <h2>Key Innovation</h2>
-            <div class="objective-box">
-                <div class="big-text">
-                    <strong>First ensemble AI framework</strong> that coordinates multiple AI techniques through digital twin technology with measurable focus on <strong>downtime reduction</strong>
-                </div>
-            </div>
-            <div class="solution-box" style="margin-top: 40px;">
-                <div class="big-text">
-                    Moving from <strong>reactive problem-solving</strong> to <strong>proactive downtime prevention</strong>
-                </div>
-            </div>
-            <div class="author-info" style="margin-top: 60px;">
-                <h3>Thank you for your attention</h3>
-                <p style="font-size: 1.4em; margin-top: 20px;">Questions and Discussion</p>
-            </div>
-        </div>
+        <!-- Content will be provided by background image -->
     </div>
 
     <div class="slide-counter">
